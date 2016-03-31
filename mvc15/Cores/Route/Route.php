@@ -122,7 +122,7 @@ class Route
         if ($this->route_handle) {
             echo $this->getResponse();
         }else{
-            App::getInstance()->template->error('404');
+            App::getInstance()->view->error('404');
             //header('HTTP/1.0 404 Not Found', true, 404);
             //header('Location:http://localhost/dev/mvc/decorator.php?param=404');
         }

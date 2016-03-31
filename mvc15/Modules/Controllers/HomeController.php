@@ -9,13 +9,13 @@ class HomeController extends \BaseController{
     }
 
     public function index() {
-        //return $this->app->template->make('wellcome');
-        $this->app->template->tpl('master');
-        $this->app->template->setVars([
+        //return $this->app->view->make('wellcome');
+        $this->app->view->tpl('master');
+        $this->app->view->setVars([
             'page_title' => 'Anasayfa',
             'page_name' => 'Merhaba',
             'page_sub_name' => 'ERA!'
         ]);
-        return $this->app->template->run();
+        return $this->app->view->run();
     }
 }

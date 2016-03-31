@@ -11,7 +11,7 @@ class App extends \Singleton {
 
     function __construct($project_name = 'ERA') {
         //$this->route = new Route();
-        //$this->template = new Template();
+        //$this->view = new View();
         //$this->project_name = $project_name;
         $this->init();
     }
