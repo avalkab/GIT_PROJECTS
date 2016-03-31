@@ -4,7 +4,7 @@ $paths = [
 	'App'                   => 'Cores/App/',
     'Route'                 => 'Cores/Route/',
 	'Bootstrap'             => 'Cores/Bootstrap/',
-    'Template'              => 'Cores/Template/',
+    'View'                  => 'Cores/View/',
     'Hook'                  => 'Cores/Hook/',
 
     /* Companents */
@@ -36,7 +36,7 @@ $alias = [
     'App'                   => '\ERA\Core\App',
     'Route'                 => '\ERA\Core\Route',
     'Bootstrap'             => '\ERA\Core\Bootstrap',
-    'Template'              => '\ERA\Core\Template',
+    'View'                  => '\ERA\Core\View',
     'Hook'                  => '\ERA\Core\Hook',
 
     /* Companents */

@@ -31,19 +31,19 @@ class Route
                 \Hook::mark('out_compile_start');
                 if (\Hook::isCompile()) {
                     if (is_object($closure)) {
-                            $reflection = new \ReflectionFunction($closure);
-                            $arguments  = $reflection->getParameters();
-                            if($reflection->getNumberOfParameters()>0) {
-                                $values = $this->bootstrap->url_scheme['path'];
-                                foreach ($arguments as $key => $value) {
-                                    $parameters[$value->name] = $values[$key+1];
-                                }
-                                $this->routes[$page_name]['vars']  = $parameters;
-                                $this->routes[$page_name]['response'] = call_user_func_array($closure, $parameters);
-                                extract($parameters);
-                            }else{
-                                $this->routes[$page_name]['response'] = call_user_func($closure);
+                        $reflection = new \ReflectionFunction($closure);
+                        $arguments  = $reflection->getParameters();
+                        if($reflection->getNumberOfParameters()>0) {
+                            $values = $this->bootstrap->url_scheme['path'];
+                            foreach ($arguments as $key => $value) {
+                                $parameters[$value->name] = $values[$key+1];
                             }
+                            $this->routes[$page_name]['vars']  = $parameters;
+                            $this->routes[$page_name]['response'] = call_user_func_array($closure, $parameters);
+                            extract($parameters);
+                        }else{
+                            $this->routes[$page_name]['response'] = call_user_func($closure);
+                        }
                     }else{
                         if (preg_match(self::CONTROLLER_PATTERN, $closure, $matches)) {
                             $controller_name = $matches[1].'Controller';

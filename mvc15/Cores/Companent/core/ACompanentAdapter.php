@@ -16,7 +16,7 @@ abstract class ACompanentAdapter implements \ICompanentBuilder {
     }
 
     protected function _var($name) {
-        return $GLOBALS['app']->template->getVar($name);
+        return $GLOBALS['app']->view->getVar($name);
     }
 
     public function getCallesClass() {
