@@ -1,11 +1,13 @@
 <?php namespace ERA\Patterns;
 
 class Singleton {
-    public static $instance = null;
+    protected static $instance = [];
+
     public static function getInstance() {
-        if (null == static::$instance) {
-            static::$instance = new static;
+        $called = get_called_class();
+        if (null == static::$instance[$called]) {
+            static::$instance[$called] = new static;
         }
-        return static::$instance;
+        return static::$instance[$called];
     }
 }

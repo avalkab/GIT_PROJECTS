@@ -22,6 +22,7 @@ class App extends \Singleton {
         }
     }
 
+    /*
     public static function getInstance() {
         if (null == self::$instance) {
             self::$instance = new self;
@@ -32,6 +33,7 @@ class App extends \Singleton {
     public static function cont() {
         return self::$instance;
     }
+    */
 
     public function register($obj_name = null, $obj = null) {
         //$this->{$obj_name} = $obj;

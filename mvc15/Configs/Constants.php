@@ -14,10 +14,14 @@
 
     define('__ROOT',        str_replace('//', '/', $_SERVER['DOCUMENT_ROOT'] . __WORK));
 
+    define('__CACHE',        __ROOT.'Storages/caches/');
+
+    define('__LANG',        __ROOT.'Langs/');
+
+    define('__COMPANENT',        __ROOT.'Companents/');
+
     define('__WEBROOT',     'http://' . __SERVERNAME . __WORK);
 
-    define('__WEBROOTPUB',  __WEBROOT.'public' );
+    define('__WEBROOTPUB',  __WEBROOT.'public/' );
 
     define('__PAGE',        str_replace([__WORK,'public','panel','/'],'' , parse_url(__REQ)['path']));
-
-?>

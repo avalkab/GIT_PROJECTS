@@ -6,6 +6,7 @@ $paths = [
 	'Bootstrap'             => 'Cores/Bootstrap/',
     'View'                  => 'Cores/View/',
     'Hook'                  => 'Cores/Hook/',
+    'File'                  => 'Cores/File/',
 
     /* Companents */
     'Companent'             => 'Cores/Companent/',
@@ -38,6 +39,7 @@ $alias = [
     'Bootstrap'             => '\ERA\Core\Bootstrap',
     'View'                  => '\ERA\Core\View',
     'Hook'                  => '\ERA\Core\Hook',
+    'File'                  => '\ERA\Core\File',
 
     /* Companents */
     'Companent'             => '\ERA\Core\Companent',
