@@ -5,8 +5,9 @@ class Cache extends \ACompanentAdapter implements \ICompanent {
     public $handle;
     public $debug = 0;
 
+
+    /* ÖNBELLEK YÖNETİMİ */
     public function startCache() {
-        //unset($_SESSION['cache']);
         \Hook::allow_compile(0);
         $this->debug = 1;
         $this->handle = $this->app()->route->getRouteUrl();
@@ -15,7 +16,7 @@ class Cache extends \ACompanentAdapter implements \ICompanent {
             $this->reCache();
         }
 
-        if ($_SESSION['cache'][$this->handle]['expire'] <= time() && \Hook::isCompile() == 0) {
+        if ($this->isExpired() && \Hook::isCompile() == 0) {
             $this->reCache();
             echo '<p style="display:inline-block; font-size:11px; padding:0 6px; background-color:#0cf; border-radius:2px;">Önbellek yenilendi</p>';
         }
@@ -24,15 +25,15 @@ class Cache extends \ACompanentAdapter implements \ICompanent {
     public function setCache() {
         header("Content-Type:text/html; charset=utf8");
         $data = '<p style="display:inline-block; font-size:11px; padding:0 6px; background-color:#fc0; border-radius:2px;">Önbellek';
-        $data .= ' : <strong color="white">'.($_SESSION['cache'][$this->handle]['expire']-time()).'sn</strong></p> ';
+        $data .= ' : <strong color="white">'.($this->fileMT()-time()).'sn</strong></p> ';
         $data .= $this->getCacheFile();
         $this->app()->route->setResponse($data);
+
     }
 
     public function getCache() {
-        unset($_SESSION['cache'][$this->handle]);
+        \File::getInstance()->delete($this->cacheFile());
         $data = $this->createCacheFile($this->app()->route->getResponse());
-        $_SESSION['cache'][$this->handle]['expire'] = time()+$this->expire;
     }
 
     public function reCache() {
@@ -41,11 +42,10 @@ class Cache extends \ACompanentAdapter implements \ICompanent {
         $this->setCache();
     }
 
-    /* FİLE */
+    /* DOSYA YÖNETİMİ */
     private function createCacheFile($data) {
         $filename = $this->cacheFile();
         $f = new \File;
-        $f->delete($filename);
         $f->create($filename);
         $f->set($filename, $data);
         return $data;
@@ -59,12 +59,19 @@ class Cache extends \ACompanentAdapter implements \ICompanent {
         return __CACHE.md5($this->handle).'.html';
     }
 
+    private function fileMT() {
+        return \File::getInstance()->modifiedTime($this->cacheFile())+$this->expire;
+    }
+    private function isExpired() {
+        return ($this->fileMT()<time()) ? 1 : 0;
+    }
+
+    /* DEBUG */
     public function debugCache() {
         if ($this->debug) {
             echo '<hr><h2>Önbellek Yapısı</h2><time>Şuanki zaman: '.(time()).'</time>';
-            echo '<pre>';
-            print_r($_SESSION['cache']);
-            echo '</pre>';
+            echo '<br>';
+            echo '<time>Önbellek zamanı: '.($this->fileMT()).'</time>';
         }
     }
 }

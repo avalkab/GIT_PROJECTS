@@ -26,6 +26,10 @@ class File extends \Singleton {
         return $t;
     }
 
+    private function modifiedTime($filename) {
+        return filemtime($filename);
+    }
+
     private function set($filename, $data) {
         return file_put_contents($filename, $data);
     }
