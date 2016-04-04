@@ -19,8 +19,8 @@ class View {
         $this->views_path = 'modules/views/';
         $this->templates_path = $this->views_path.'templates/';
         $this->setVars([
-            'project_name' => App::getInstance()->project_name,
-            'project_version' => App::getInstance()->project_version
+            'project_name' => app()->project_name,
+            'project_version' => app()->project_version
         ]);
     }
 

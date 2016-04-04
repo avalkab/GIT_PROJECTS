@@ -1,7 +1,7 @@
 <?php namespace ERA\Companents;
 class Cache extends \ACompanentAdapter implements \ICompanent {
     public $version = '2.1.32';
-    public $expire = 60;
+    public $expire = 500;
     public $handle;
     public $debug = 0;
 
@@ -69,9 +69,11 @@ class Cache extends \ACompanentAdapter implements \ICompanent {
     /* DEBUG */
     public function debugCache() {
         if ($this->debug) {
-            echo '<hr><h2>Önbellek Yapısı</h2><time>Şuanki zaman: '.(time()).'</time>';
+            echo '<hr><h2>Önbellek Yapısı</h2>';
+            echo '<time>Şuanki zaman: '.(date('d-m-Y H:i:s')).'</time>';
             echo '<br>';
-            echo '<time>Önbellek zamanı: '.($this->fileMT()).'</time>';
+            echo '<time>Önbellek sonlanma tarihi: '.(date('d-m-Y H:i:s', $this->fileMT())).'</time>';
         }
+        print_r( \Folder::getInstance()->listFiles(__CACHE) );
     }
 }

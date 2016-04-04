@@ -26,6 +26,10 @@ class File extends \Singleton {
         return $t;
     }
 
+    private function getFileSize($filename) {
+        return filesize($filename);
+    }
+
     private function modifiedTime($filename) {
         return filemtime($filename);
     }

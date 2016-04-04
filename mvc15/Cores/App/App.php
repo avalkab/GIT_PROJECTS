@@ -10,9 +10,6 @@ class App extends \Singleton {
     public $object_collection = array();
 
     function __construct($project_name = 'ERA') {
-        //$this->route = new Route();
-        //$this->view = new View();
-        //$this->project_name = $project_name;
         $this->init();
     }
 

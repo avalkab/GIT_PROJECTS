@@ -7,6 +7,8 @@ $paths = [
     'View'                  => 'Cores/View/',
     'Hook'                  => 'Cores/Hook/',
     'File'                  => 'Cores/File/',
+    'Folder'                => 'Cores/Folder/',
+    'Auth'                  => 'Cores/Auth/',
 
     /* Companents */
     'Companent'             => 'Cores/Companent/',
@@ -40,6 +42,8 @@ $alias = [
     'View'                  => '\ERA\Core\View',
     'Hook'                  => '\ERA\Core\Hook',
     'File'                  => '\ERA\Core\File',
+    'Folder'                => '\ERA\Core\Folder',
+    'Auth'                  => '\ERA\Core\Auth',
 
     /* Companents */
     'Companent'             => '\ERA\Core\Companent',

@@ -5,11 +5,10 @@ class Hook extends \Singleton {
     private $allow_compiled_content = 1;
 
     public static function mark($name) {
-        $app = $GLOBALS['app'];
         $marks = self::getInstance()->marks[$name];
         if ($marks) {
             foreach ($marks as $key => $value) {
-                $obj = $app->companent->{$key};
+                $obj = companent()->{$key};
                 $fnc = $value['function'];
                 $params = (array)$value['parameters'];
 
