@@ -1,0 +1,1 @@
+"{id}" ID'li "{sef}" sef linkine sahip haberi okuyorsunuz.
