@@ -24,13 +24,15 @@ $app->route->get('haber-detay/{int}/{any}', function($id, $sef) {
 });
 
 /* 404 */
-$app->route->get('404', function() use ($app) {
+$app->route->get('404', function() {
     return view()->error('404');
 });
 
 /* ARAMA */
-$app->route->post('arama', function() use ($app) {
+$app->route->post('arama', function() {
+    echo '<pre>';
     print_r($_POST);
+    echo '</pre>';
 });
 
 $app->route->run();
