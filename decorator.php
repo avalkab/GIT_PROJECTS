@@ -2,7 +2,7 @@
 
 require_once('Configs/Start.php');
 
-echo Auth::userId();
+echo Url::make('haber-detay', [Slug::make('Diyarbakır saldırısında kullanılan araç PKK\'nın tehdidiyle ihaleden çekilen müteahhit çıktı')]);
 
 ?>
 

@@ -9,6 +9,8 @@ $paths = [
     'File'                  => 'Cores/File/',
     'Folder'                => 'Cores/Folder/',
     'Auth'                  => 'Cores/Auth/',
+    'Slug'                  => 'Cores/Slug/',
+    'Url'                   => 'Cores/Url/',
 
     /* Companents */
     'Companent'             => 'Cores/Companent/',
@@ -44,6 +46,8 @@ $alias = [
     'File'                  => '\ERA\Core\File',
     'Folder'                => '\ERA\Core\Folder',
     'Auth'                  => '\ERA\Core\Auth',
+    'Slug'                  => '\ERA\Core\Slug',
+    'Url'                   => '\ERA\Core\Url',
 
     /* Companents */
     'Companent'             => '\ERA\Core\Companent',

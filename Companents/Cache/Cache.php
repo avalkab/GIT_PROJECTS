@@ -69,11 +69,13 @@ class Cache extends \ACompanentAdapter implements \ICompanent {
     /* DEBUG */
     public function debugCache() {
         if ($this->debug) {
+            echo '<pre>';
             echo '<hr><h2>Önbellek Yapısı</h2>';
             echo '<time>Şuanki zaman: '.(date('d-m-Y H:i:s')).'</time>';
             echo '<br>';
-            echo '<time>Önbellek sonlanma tarihi: '.(date('d-m-Y H:i:s', $this->fileMT())).'</time>';
+            echo '<time>Önbellek sonlanma tarihi: '.(date('d-m-Y H:i:s', $this->fileMT())).'</time><br>';
         }
         print_r( \Folder::getInstance()->listFiles(__CACHE) );
+        echo '</pre>';
     }
 }
