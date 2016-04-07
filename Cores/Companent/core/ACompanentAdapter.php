@@ -11,12 +11,8 @@ abstract class ACompanentAdapter implements \ICompanentBuilder {
         $this->getSettings();
     }
 
-    protected function app() {
-        return $GLOBALS['app'];
-    }
-
     protected function _var($name) {
-        return $GLOBALS['app']->view->getVar($name);
+        return view()->getVar($name);
     }
 
     public function getCallesClass() {
@@ -41,7 +37,7 @@ abstract class ACompanentAdapter implements \ICompanentBuilder {
 
         if (isset($this->settings['events'])) {
             foreach ($this->settings['events'] as $key => $value) {
-                \Hook::register($key, $value, $class_name, $this->called_class);
+                hook()->register($key, $value, $class_name, $this->called_class);
             }
         }
     }

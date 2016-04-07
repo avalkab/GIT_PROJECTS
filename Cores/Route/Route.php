@@ -21,15 +21,15 @@ class Route
     }
 
     public function request($type, $url, $closure = null) {
-        \Hook::mark('request_start');
+        hook()->mark('request_start');
         if ($this->route_handle == false) {
             $page_name = md5($url);
             $pattern_data = $this->setPattern($url);
             $this->routes[$page_name]['pattern'] = $pattern_data['pattern'];
             if (preg_match('/'.$pattern_data['pattern'].'/', $this->getRouteUrl())) {
                 $this->route_handle = $page_name;
-                \Hook::mark('out_compile_start');
-                if (\Hook::isCompile()) {
+                hook()->mark('out_compile_start');
+                if (hook()->isCompile()) {
                     if (is_object($closure)) {
                         $reflection = new \ReflectionFunction($closure);
                         $arguments  = $reflection->getParameters();
@@ -51,15 +51,15 @@ class Route
                             $this->routes[$page_name]['response'] = call_user_method($matches[2], new $controller_name());
                         }
                     }
-                    \Hook::mark('in_compile_end');
+                    hook()->mark('in_compile_end');
                 }else{
-                    \Hook::mark('compile_response');
+                    hook()->mark('compile_response');
                 }
             }else{
                 $this->route_handle = 0;
             }
         }
-        \Hook::mark('request_end');
+        hook()->mark('request_end');
     }
 
     public function get($url, $closure = null) {
@@ -126,7 +126,7 @@ class Route
             //header('HTTP/1.0 404 Not Found', true, 404);
             //header('Location:http://localhost/dev/mvc/decorator.php?param=404');
         }
-        \Hook::mark('run_end');
+        hook()->mark('run_end');
         //exit;
     }
 }

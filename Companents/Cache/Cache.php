@@ -8,15 +8,15 @@ class Cache extends \ACompanentAdapter implements \ICompanent {
 
     /* ÖNBELLEK YÖNETİMİ */
     public function startCache() {
-        \Hook::allow_compile(1);
+        hook()->allow_compile(0);
         $this->debug = 1;
-        $this->handle = $this->app()->route->getRouteUrl();
+        $this->handle = route()->getRouteUrl();
 
-        if (empty($this->getCacheFile()) && \Hook::isCompile() == 0) {
+        if (empty($this->getCacheFile()) && hook()->isCompile() == 0) {
             $this->reCache();
         }
 
-        if ($this->isExpired() && \Hook::isCompile() == 0) {
+        if ($this->isExpired() && hook()->isCompile() == 0) {
             $this->reCache();
             echo '<p style="display:inline-block; font-size:11px; padding:0 6px; background-color:#0cf; border-radius:2px;">Önbellek yenilendi</p>';
         }
@@ -27,17 +27,17 @@ class Cache extends \ACompanentAdapter implements \ICompanent {
         $data = '<p style="display:inline-block; font-size:11px; padding:0 6px; background-color:#fc0; border-radius:2px;">Önbellek';
         $data .= ' : <strong color="white">'.($this->fileMT()-time()).'sn</strong></p> ';
         $data .= $this->getCacheFile();
-        $this->app()->route->setResponse($data);
+        route()->setResponse($data);
 
     }
 
     public function getCache() {
         \File::getInstance()->delete($this->cacheFile());
-        $data = $this->createCacheFile($this->app()->route->getResponse());
+        $data = $this->createCacheFile(route()->getResponse());
     }
 
     public function reCache() {
-        \Hook::allow_compile(1);
+        hook()->allow_compile(1);
         $this->getCache();
         $this->setCache();
     }

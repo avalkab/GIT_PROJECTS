@@ -13,7 +13,7 @@ function route() {
 }
 
 function hook() {
-    return app()->route;
+    return app()->hook;
 }
 
 function companent() {

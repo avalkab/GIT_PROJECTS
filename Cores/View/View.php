@@ -71,7 +71,7 @@ class View {
         preg_match_all(self::PATTERN_MARK, $this->last_content, $marks); //PREG_SET_ORDER
         if (sizeof($marks[0])>0) {
             foreach ($marks[1] as $key => $value) {
-                $this->last_content = str_replace($marks[0][$key], Hook::mark($value), $this->last_content);
+                $this->last_content = str_replace($marks[0][$key], hook()->mark($value), $this->last_content);
             }
         }
     }

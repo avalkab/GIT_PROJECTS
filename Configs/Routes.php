@@ -3,7 +3,7 @@
 //$app->route->get('/', 'HomeController:index');
 
 $app->route->get('/', function() {
-    return view()->main('home', 'main');
+    return view()->setVar('page_title', 'Anasayfa')->main('home', 'main');
 });
 
 /* MAİL */
