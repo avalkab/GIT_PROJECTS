@@ -8,7 +8,7 @@ class Cache extends \ACompanentAdapter implements \ICompanent {
 
     /* ÖNBELLEK YÖNETİMİ */
     public function startCache() {
-        hook()->allow_compile(0);
+        hook()->allowCompile(0);
         $this->debug = 1;
         $this->handle = route()->getRouteUrl();
 
@@ -37,7 +37,7 @@ class Cache extends \ACompanentAdapter implements \ICompanent {
     }
 
     public function reCache() {
-        hook()->allow_compile(1);
+        hook()->allowCompile(1);
         $this->getCache();
         $this->setCache();
     }

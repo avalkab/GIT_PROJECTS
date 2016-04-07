@@ -24,7 +24,7 @@ class Hook extends \Singleton {
         }
     }
 
-    public function allow_compile($bool = 1) {
+    public function allowCompile($bool = 1) {
         $this->allow_compiled_content = $bool;
     }
 
