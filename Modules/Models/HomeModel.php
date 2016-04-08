@@ -1,6 +1,7 @@
 <?php namespace ERA\Models;
 
 class HomeModel extends \BaseModel {
+
     protected $request_method = 'POST';
     protected $table = 'users';
 
@@ -12,15 +13,12 @@ class HomeModel extends \BaseModel {
         'nickname'      => ['type' => 'username', 'min' => 6, 'max' => 14]
     ];
 
-    function __construct(){
-        $this->setRequestData([
-            'first_name'    => 'Erhan',
-            'last_name'     => 'Sonmez',
-            'age'           => '25',
-            'mail'          => 'erhan.sonmez@hotmail.com.tr',
-            'nickname'      => 'erhansonmez'
-        ]);
+    /*
+    function __construct() {
+        parent::__construct();
+
         $this->validRequestData();
     }
+    */
 
 }

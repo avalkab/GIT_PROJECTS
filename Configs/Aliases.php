@@ -11,6 +11,7 @@ $paths = [
     'Auth'                  => 'Cores/Auth/',
     'Slug'                  => 'Cores/Slug/',
     'Url'                   => 'Cores/Url/',
+    'Input'                 => 'Cores/Input/',
 
     /* Companents */
     'Companent'             => 'Cores/Companent/',
@@ -48,6 +49,7 @@ $alias = [
     'Auth'                  => '\ERA\Core\Auth',
     'Slug'                  => '\ERA\Core\Slug',
     'Url'                   => '\ERA\Core\Url',
+    'Input'                 => '\ERA\Core\Input',
 
     /* Companents */
     'Companent'             => '\ERA\Core\Companent',

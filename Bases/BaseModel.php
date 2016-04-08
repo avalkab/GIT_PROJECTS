@@ -1,5 +1,7 @@
 <?php namespace ERA\Bases;
-class BaseModel{
+
+class BaseModel {
+
     const PATTERN_STR       = '/^[a-zA-Z]+$/';
     const PATTERN_STRS      = '/^[a-zA-Z\s]+$/';
     const PATTERN_INT       = '/^[0-9]+$/';
@@ -9,20 +11,46 @@ class BaseModel{
     const PATTERN_MAIL      = '/^([a-zA-Z0-9-_.]+)@([a-zA-Z-.]+)$/';
     const PATTERN_USERNAME  = '/^[a-zA-Z0-9-_.]+$/';
 
+    protected $request_method = 'POST';
+    protected $table;
+    protected $fillable;
+
     protected $request_data;
     protected $validate = 0;
 
+    //'token' => ['type' => 'alns',  'min' => 32, 'max' => 32]
+
     function __construct() {
-        /*
-        $this->setRequestData([
-            'first_name'    => 'Erhan',
-            'last_name'     => 'Sonmez',
-            'age'           => '25',
-            'mail'          => 'erhan.sonmez@hotmail.com.tr',
-            'nickname'      => 'erhansonmez'
-        ]);
-        $this->validRequestData();
-        */
+       $this->setRequestData();
+    }
+
+    function __get($key) {
+        return $this->request_data[$key];
+    }
+
+    public function setRequestMethod($method) {
+        $this->request_method = $method;
+    }
+
+    public function setTable($table) {
+        $this->table = $table;
+    }
+
+    public function setFillable(Array $parameters = null) {
+        $this->fillable = $parameters;
+    }
+
+    public function setRequestData() {
+        $rm = strtoupper($this->request_method);
+        $input = \Input::getInstance()->getRequestData($rm);
+        print_r($this->fillable);
+        return;
+        $reqs = array_keys($this->fillable);
+        if (sizeof($reqs)>1) {
+            foreach ($reqs as $value) {
+                $this->request_data[$value] = $input[$value];
+            }
+        }
     }
 
     protected function validMethod() {
@@ -69,11 +97,7 @@ class BaseModel{
         }
     }
 
-    public function setRequestData($data) {
-        $this->request_data = $data;
-    }
-
-    public function getValidate() {
-        return $this->validate;
+    public function isValidate() {
+        return ($this->validate == 1) ? true : false;
     }
 }
