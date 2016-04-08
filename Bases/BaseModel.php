@@ -43,12 +43,10 @@ class BaseModel {
     public function setRequestData() {
         $rm = strtoupper($this->request_method);
         $input = \Input::getInstance()->getRequestData($rm);
-        print_r($this->fillable);
-        return;
-        $reqs = array_keys($this->fillable);
-        if (sizeof($reqs)>1) {
-            foreach ($reqs as $value) {
-                $this->request_data[$value] = $input[$value];
+        $fillable_keys = array_keys($this->fillable);
+        if (sizeof($fillable_keys)>1) {
+            foreach ($fillable_keys as $value) {
+                $this->request_data[$value] = ($this->fillable[$value]['hash']) ? md5($input[$value]) : $input[$value];
             }
         }
     }

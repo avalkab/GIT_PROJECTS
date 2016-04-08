@@ -2,24 +2,8 @@
 
 require_once('Configs/Start.php');
 
-$auth = new Auth(
-    'POST',
-    'users',
-    [
-        'username' => [
-            'type' => 'str',
-            'min' => 2,
-            'max' => 30
-        ],
-        'password' => [
-            'type' => 'str',
-            'min' => 2,
-            'max' => 30
-        ]
-    ]
-);
-
-print_r($auth);
+$uc = new User;
+print_r($uc);
 
 ?>
 

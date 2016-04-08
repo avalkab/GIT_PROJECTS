@@ -9,6 +9,7 @@ $paths = [
     'File'                  => 'Cores/File/',
     'Folder'                => 'Cores/Folder/',
     'Auth'                  => 'Cores/Auth/',
+    'IAuth'                 => 'Cores/Auth/',
     'Slug'                  => 'Cores/Slug/',
     'Url'                   => 'Cores/Url/',
     'Input'                 => 'Cores/Input/',
@@ -29,6 +30,7 @@ $paths = [
     'BaseController'        => 'Bases/',
     'BaseModel'             => 'Bases/',
     'HomeController'        => 'Modules/Controllers/',
+    'User'                  => 'Modules/Controllers/',
 
     /* Models */
     'HomeModel'             => 'Modules/Models/',
@@ -47,6 +49,7 @@ $alias = [
     'File'                  => '\ERA\Core\File',
     'Folder'                => '\ERA\Core\Folder',
     'Auth'                  => '\ERA\Core\Auth',
+    'IAuth'                 => '\ERA\Core\Auth\IAuth',
     'Slug'                  => '\ERA\Core\Slug',
     'Url'                   => '\ERA\Core\Url',
     'Input'                 => '\ERA\Core\Input',
@@ -67,6 +70,7 @@ $alias = [
     'BaseController'        => '\ERA\Bases\BaseController',
     'BaseModel'             => '\ERA\Bases\BaseModel',
     'HomeController'        => '\ERA\Controllers\HomeController',
+    'User'                  => '\ERA\Controllers\UserController',
 
     /* Models */
     'HomeModel'             => '\ERA\Models\HomeModel',
