@@ -19,3 +19,7 @@ function hook() {
 function companent() {
     return app()->companent;
 }
+
+function db() {
+    return DB::getInstance()->db;
+}

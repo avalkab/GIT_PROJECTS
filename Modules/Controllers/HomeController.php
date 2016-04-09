@@ -12,9 +12,9 @@ class HomeController extends \BaseController{
         //return $this->app->view->make('wellcome');
         return view()
         ->setVars([
-            'page' => 'about',
-            'title' => 'Anasayfa',
-            'content' => 'Merhaba'
+            'page'      => 'about',
+            'title'     => 'Anasayfa',
+            'content'   => 'Merhaba'
         ])
         ->master('main');
     }

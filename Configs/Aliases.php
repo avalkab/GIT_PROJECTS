@@ -13,6 +13,7 @@ $paths = [
     'Slug'                  => 'Cores/Slug/',
     'Url'                   => 'Cores/Url/',
     'Input'                 => 'Cores/Input/',
+    'DB'                    => 'Cores/DB/',
 
     /* Companents */
     'Companent'             => 'Cores/Companent/',
@@ -53,6 +54,7 @@ $alias = [
     'Slug'                  => '\ERA\Core\Slug',
     'Url'                   => '\ERA\Core\Url',
     'Input'                 => '\ERA\Core\Input',
+    'DB'                    => '\ERA\Core\DB',
 
     /* Companents */
     'Companent'             => '\ERA\Core\Companent',

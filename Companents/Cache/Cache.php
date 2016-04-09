@@ -8,7 +8,7 @@ class Cache extends \ACompanentAdapter implements \ICompanent {
 
     /* ÖNBELLEK YÖNETİMİ */
     public function startCache() {
-        hook()->allowCompile(0);
+        hook()->allowCompile(1);
         $this->debug = 1;
         $this->handle = route()->getRouteUrl();
 
@@ -68,6 +68,7 @@ class Cache extends \ACompanentAdapter implements \ICompanent {
 
     /* DEBUG */
     public function debugCache() {
+        return;
         if ($this->debug) {
             echo '<pre>';
             echo '<hr><h2>Önbellek Yapısı</h2>';

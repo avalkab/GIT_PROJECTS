@@ -2,11 +2,8 @@
 
 require_once('Configs/Start.php');
 
-$uc = new User;
-print_r($uc);
-
 ?>
 
 <hr>
 
-<?php $app->debug(); ?>
+<?php //$app->debug(); ?>
