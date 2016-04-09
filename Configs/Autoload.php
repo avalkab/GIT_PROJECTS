@@ -13,12 +13,4 @@
         }
     }
 
-    function autoload_dbfinder($class) {
-        $file = __ROOT.'Cores/DbFinder/lib/'.$class.'.php';
-        if (file_exists($file)) {
-            require_once($file);
-        }
-    }
-
     spl_autoload_register('autoload');
-    spl_autoload_register('autoload_dbfinder');

@@ -1,7 +1,7 @@
 <?php namespace ERA\Companents;
 class Cache extends \ACompanentAdapter implements \ICompanent {
     public $version = '2.1.32';
-    public $expire = 500;
+    public $expire = 3600;
     public $handle;
     public $debug = 0;
 
@@ -9,7 +9,7 @@ class Cache extends \ACompanentAdapter implements \ICompanent {
     /* ÖNBELLEK YÖNETİMİ */
     public function startCache() {
         hook()->allowCompile(1);
-        $this->debug = 1;
+        $this->debug = 0;
         $this->handle = route()->getRouteUrl();
 
         if (empty($this->getCacheFile()) && hook()->isCompile() == 0) {
@@ -24,7 +24,7 @@ class Cache extends \ACompanentAdapter implements \ICompanent {
 
     public function setCache() {
         header("Content-Type:text/html; charset=utf8");
-        $data = '<p style="display:inline-block; font-size:11px; padding:0 6px; background-color:#fc0; border-radius:2px;">Önbellek';
+        $data = '<p id="cache_time" style="display:inline-block; font-size:11px; padding:0 6px; background-color:#fc0; border-radius:2px;">Önbellek';
         $data .= ' : <strong color="white">'.($this->fileMT()-time()).'sn</strong></p> ';
         $data .= $this->getCacheFile();
         route()->setResponse($data);
@@ -68,15 +68,14 @@ class Cache extends \ACompanentAdapter implements \ICompanent {
 
     /* DEBUG */
     public function debugCache() {
-        return;
         if ($this->debug) {
             echo '<pre>';
             echo '<hr><h2>Önbellek Yapısı</h2>';
             echo '<time>Şuanki zaman: '.(date('d-m-Y H:i:s')).'</time>';
             echo '<br>';
             echo '<time>Önbellek sonlanma tarihi: '.(date('d-m-Y H:i:s', $this->fileMT())).'</time><br>';
+            print_r( \Folder::getInstance()->listFiles(__CACHE) );
+            echo '</pre>';
         }
-        print_r( \Folder::getInstance()->listFiles(__CACHE) );
-        echo '</pre>';
     }
 }

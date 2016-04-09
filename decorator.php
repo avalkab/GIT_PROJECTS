@@ -2,8 +2,19 @@
 
 require_once('Configs/Start.php');
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 ?>
-
 <hr>
-
-<?php //$app->debug(); ?>
+<?php $app->debug(); ?>
