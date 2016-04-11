@@ -1,6 +1,9 @@
 <?php
-
-function cache_expire_counter() {
-    return '<p>selam</p>';
+function app_debug() {
+    echo '<pre>
+    <h1>DEBUG</h1>';
+    print_r(app());
+    echo '</pre>';
 }
-hook()->setEvent('body_end', 'cache_expire_counter');
+
+hook()->setEvent('run_end', 'app_debug');

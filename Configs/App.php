@@ -1,5 +1,6 @@
 <?php
 $app = App::getInstance();
+
 require_once('Helpers.php');
 
 $app->registerArray([
@@ -9,6 +10,8 @@ $app->registerArray([
     'companent' => new Companent
 ]);
 
-require_once('Companents.php');
 require_once(__ROOT.'Helpers/Functions.php');
+
+require_once('Companents.php');
+
 require_once('Routes.php');

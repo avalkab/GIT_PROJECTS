@@ -1,14 +1,24 @@
 <?php namespace ERA\Companents;
 class Cache extends \ACompanentAdapter implements \ICompanent {
     public $version = '2.1.32';
-    public $expire = 3600;
+    public $expire = 500;
     public $handle;
     public $debug = 0;
+
+    public $file;
+    public $folder;
+
+    function __construct() {
+        parent::__construct();
+
+        $this->file = new \File;
+        $this->folder = new \Folder;
+    }
 
 
     /* ÖNBELLEK YÖNETİMİ */
     public function startCache() {
-        hook()->allowCompile(1);
+        hook()->allowCompile(0);
         $this->debug = 0;
         $this->handle = route()->getRouteUrl();
 
@@ -18,7 +28,7 @@ class Cache extends \ACompanentAdapter implements \ICompanent {
 
         if ($this->isExpired() && hook()->isCompile() == 0) {
             $this->reCache();
-            echo '<p style="display:inline-block; font-size:11px; padding:0 6px; background-color:#0cf; border-radius:2px;">Önbellek yenilendi</p>';
+            echo '<p id="cache_time" style="display:inline-block; font-size:11px; padding:0 6px; background-color:#0cf; border-radius:2px;">Önbellek yenilendi</p>';
         }
     }
 
@@ -32,7 +42,7 @@ class Cache extends \ACompanentAdapter implements \ICompanent {
     }
 
     public function getCache() {
-        \File::getInstance()->delete($this->cacheFile());
+        $this->file->delete($this->cacheFile());
         $data = $this->createCacheFile(route()->getResponse());
     }
 
@@ -42,17 +52,38 @@ class Cache extends \ACompanentAdapter implements \ICompanent {
         $this->setCache();
     }
 
+    public function cacheExpireCounter() {
+        echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+        <script>
+        function isTimeUp(t) {
+            if (t <= 0 || isNaN(t) || t == undefined) { location.reload(); }
+        }
+        $(document).ready(function(){
+            var s = $("#cache_time strong").eq(0);
+            var t = s.text();
+                t = t.replace("sn", "");
+                t = parseInt(t,10);
+
+            isTimeUp(t)
+            setInterval(function(){
+                isTimeUp(t);
+                t -= 1;
+                s.text(t+"sn");
+            }, 1000);
+        });
+        </script>';
+    }
+
     /* DOSYA YÖNETİMİ */
     private function createCacheFile($data) {
         $filename = $this->cacheFile();
-        $f = new \File;
-        $f->create($filename);
-        $f->set($filename, $data);
+        $this->file->create($filename);
+        $this->file->set($filename, $data);
         return $data;
     }
 
     private function getCacheFile() {
-        return \File::getInstance()->get($this->cacheFile());
+        return $this->file->get($this->cacheFile());
     }
 
     private function cacheFile() {
@@ -60,7 +91,7 @@ class Cache extends \ACompanentAdapter implements \ICompanent {
     }
 
     private function fileMT() {
-        return \File::getInstance()->modifiedTime($this->cacheFile())+$this->expire;
+        return $this->file->modifiedTime($this->cacheFile())+$this->expire;
     }
     private function isExpired() {
         return ($this->fileMT()<time()) ? 1 : 0;
@@ -74,7 +105,7 @@ class Cache extends \ACompanentAdapter implements \ICompanent {
             echo '<time>Şuanki zaman: '.(date('d-m-Y H:i:s')).'</time>';
             echo '<br>';
             echo '<time>Önbellek sonlanma tarihi: '.(date('d-m-Y H:i:s', $this->fileMT())).'</time><br>';
-            print_r( \Folder::getInstance()->listFiles(__CACHE) );
+            print_r( $this->folder->listFiles(__CACHE) );
             echo '</pre>';
         }
     }

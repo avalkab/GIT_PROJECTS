@@ -119,14 +119,18 @@ class Route
     }
 
     public function run() {
+        hook()->mark('run_begin');
+
         if ($this->route_handle) {
             echo $this->getResponse();
         }else{
-            App::getInstance()->view->error('404');
+            view()->error('404');
             //header('HTTP/1.0 404 Not Found', true, 404);
             //header('Location:http://localhost/dev/mvc/decorator.php?param=404');
         }
+
         hook()->mark('run_end');
-        //exit;
+
+        exit;
     }
 }

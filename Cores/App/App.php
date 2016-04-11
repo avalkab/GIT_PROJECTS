@@ -49,13 +49,6 @@ class App extends \Singleton {
         $this->project_version = $version;
     }
 
-    public function debug() {
-        echo '<pre>
-        <h1>DEBUG</h1>';
-        print_r($this);
-        echo '</pre>';
-    }
-
     private function init() {
         $this->setProjectName();
         $this->setProjectVersion();
