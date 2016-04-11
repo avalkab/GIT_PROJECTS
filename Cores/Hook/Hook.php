@@ -54,13 +54,15 @@ class Hook extends \Singleton {
     }
 
     public function register($name, $function, $single_class, $namespace_class, Array $parameters = null) {
-        if (method_exists($namespace_class, $function)) {
-            $this->marks[$name][strtolower($single_class)] = [
-                'class_name' => $single_class,
-                'namespace_class_name' => '\\'.$namespace_class,
-                'function' => $function,
-                'parameters' => $parameters
-            ];
+        foreach ((array)$function as $value) {
+            if (method_exists($namespace_class, $value)) {
+                $this->marks[$name][strtolower($single_class)] = [
+                    'class_name' => $single_class,
+                    'namespace_class_name' => '\\'.$namespace_class,
+                    'function' => $value,
+                    'parameters' => $parameters
+                ];
+            }
         }
     }
 }
