@@ -1,6 +1,6 @@
 <?php namespace ERA\Companents;
 class Cache extends \ACompanentAdapter implements \ICompanent {
-    public $version = '2.1.32';
+    public $version = '0.1.32';
     public $expire = 500;
     public $handle;
     public $debug = 0;

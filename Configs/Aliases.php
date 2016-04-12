@@ -14,6 +14,8 @@ $paths = [
     'Url'                   => 'Cores/Url/',
     'Input'                 => 'Cores/Input/',
     'DB'                    => 'Cores/DB/',
+    'Password'              => 'Cores/Secure/',
+    'BiometricPassword'     => 'Cores/Secure/',
 
     /* Companents */
     'Companent'             => 'Cores/Companent/',
@@ -55,6 +57,8 @@ $alias = [
     'Url'                   => '\ERA\Core\Url',
     'Input'                 => '\ERA\Core\Input',
     'DB'                    => '\ERA\Core\DB',
+    'Password'              => '\ERA\Core\Secure\Password',
+    'BiometricPassword'     => '\ERA\Core\Secure\BiometricPassword',
 
     /* Companents */
     'Companent'             => '\ERA\Core\Companent',
