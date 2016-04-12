@@ -12,4 +12,20 @@ class BiometricPassword extends Password {
         }
     }
 
+    public function Level1(Array $fingerprints = null) {
+        $this->saveFingerprints(1, $fingerprints);
+    }
+
+    public function Level2(Array $fingerprints = null) {
+        $this->saveFingerprints(1, $fingerprints);
+    }
+
+    public function Level3(Array $fingerprints = null) {
+        $this->saveFingerprints(1, $fingerprints);
+    }
+
+    private function saveFingerprints(Array $fingerprints = null) {
+
+    }
+
 }

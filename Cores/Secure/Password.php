@@ -2,16 +2,14 @@
 
 class Password extends \Singleton {
 
+    const CHARSET = 'abcdefgijklmnoprstuvyzABCDEFGUVYZOPRSTUVYZ+[*?{^]$(<=!>|}:)-';
+
     const PATTERN_SPACE = '/[[:space:]]/';
     const PATTERN_NUMERIC = '/[[:digit:]]/';
     const PATTERN_LOWER = '/[[:lower:]]/';
     const PATTERN_UPPER = '/[[:upper:]]/';
     const PATTERN_SPECIALS = '/[[:punct:]]/';
     const PATTERN_TR = '/[ÇŞĞÜÖİçşğüöı]/';
-
-    private $CHAR_LOWER = ['a','b','c','d','e','f','g','i','j','k','l','m','n','o','p','r','s','t','u','v','y','z'];
-    private $CHAR_UPPER = ['A','B','C','D','E','F','G','U','V','Y','Z','O','P','R','S','T','U','V','Y','Z'];
-    private $CHAR_SPECIALS = ['+','*','?','[','^',']','$','(',')','{','}','=','!','<','>','|',':','-'];
 
     protected $password_str = null;
     protected $password_strong_level = 0;
@@ -26,11 +24,10 @@ class Password extends \Singleton {
     */
 
     public static function generate($length = 10) {
-        $s = self::getInstance();
-        $stack = array_merge($s->CHAR_LOWER, $s->CHAR_SPECIALS, $s->CHAR_UPPER);
-        shuffle($stack);
+        $stack = str_shuffle(self::CHARSET);
+        $len = strlen($stack)-1;
         for ($i=0; $i<$length; $i++) {
-            $password .= $stack[$i];
+            $password .= substr($stack, rand(0, $len), 1);
         }
         return $password;
     }
