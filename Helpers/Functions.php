@@ -18,7 +18,7 @@ function pass_debug() {
     echo '<input type="text" class="bio-pass" maxlength="1" tabindex="3">';
     echo '<input type="text" class="bio-pass" maxlength="1" tabindex="4">';
     echo '<input type="text" class="bio-pass" maxlength="1" tabindex="5">';
-    echo '<input type="text" class="bio-pass" maxlength="1" tabindex="6">';
+    echo '<input type="text" class="bio-pass" maxlength="1" tabindex="6" id="bio_pas_end">';
     echo '<input type="hidden" readonly="readonly">';
     echo '</div>';
     BiometricPassword::init('.bio-pass');

@@ -19,7 +19,7 @@ class BiometricPassword extends Password {
          }
          .bio-pass{
             float:left;
-            border:1px solid transparent;
+            border:1px solid #ddd;
             background-color:#e5e5e5;
             width:20px;
             height:20px;
@@ -38,14 +38,36 @@ class BiometricPassword extends Password {
             box-shadow:0 0 10px #bbb;
             border-color:#aaa!important;
             background-color:#fff;
+            transform:scale(1.2);
          }
          .bio-disabled{
             background-color:#ccc;
             color:#eee;
          }
+         .bio-button{
+            float:left;
+            border-radius: 10px;
+            background-color:#5fc;
+            border:0;
+            outline:0;
+            margin-left:5px;
+            height:20px;
+            line-height20px;
+            text-align:center;
+            color:#777;
+         }
          </style>
         <script>
         $(document).ready(function() {
+
+            function checkChar(str) {
+                var re = /[a-zA-Z0-9]/;
+                var m;
+
+                if ((m = re.exec(str)) !== null) {
+                    return true;
+                }
+            }
 
             var password_input = $("'.$password_input_name.'");
             var password = new Array();
@@ -53,9 +75,11 @@ class BiometricPassword extends Password {
             var char;
 
             // Başla
-            password_input.keydown(function(event) {
+            password_input.keypress(function(event) {
 
                 char = String.fromCharCode(event.keyCode);
+
+                if(!checkChar(char)) { return false; }
 
                 password[char] = {
                     "char" : char,
@@ -71,13 +95,20 @@ class BiometricPassword extends Password {
             // Bitir
             password_input.keyup(function(event) {
 
+                if(!checkChar(char)) { return false; }
+
+                var id = $(this).attr("id");
+
+                if ("bio_pas_end" == id) {
+                    $(".bio-pass-wrapper").append("<button class=\"bio-button\">Onayla</button>");
+                }
+
                 var index = $(this).attr("tabindex");
                 $(this).addClass("bio-disabled").attr("disabled", "disabled");
                 $(this).next("input").select();
 
                 password[char].end_speed = event.timeStamp;
 
-                console.log( (password[char].end_speed)-(password[char].start_speed) );
                 console.log(password);
 
             });
