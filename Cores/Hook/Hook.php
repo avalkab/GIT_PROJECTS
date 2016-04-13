@@ -6,7 +6,26 @@ class Hook extends \Singleton {
     private $allow_compiled_content = 1;
     private $compiled_events = array();
 
+    private $ignore_collection = array();
+
+    private $current_page;
+
+    public function setCurrentPage($page) {
+        $this->current_page = $page;
+    }
+
+    public function setIgnores() {
+        $this->ignore_collection = require_once(__ROOT.'Configs/HookIngores.php');
+    }
+
+    public function isIgnore() {
+        return in_array($this->current_page, $this->ignore_collection) ? true : false;
+    }
+
     public function mark($name) {
+        if ($this->isIgnore() === true) {
+            return false;
+        }
         $marks = $this->marks[$name];
         if ($marks) {
             foreach ($marks as $key => $value) {

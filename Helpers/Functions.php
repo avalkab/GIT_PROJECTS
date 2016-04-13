@@ -6,18 +6,16 @@ function app_debug() {
     echo '<script type="text/javascript">
     $(document).ready(function(){
 
-        $.ajax({
-            method : "POST",
-            url : "http://localhost/dev/mvc/decorator.php?param=ajax?proccess=password",
-            data : {
-                "password" : $("#ajax_password").val()
-            },
-            dataType : "json",
-            success: function(response) {
-                console.log(response);
-            }
+        var ajax_password_input = $("#ajax_password");
+        ajax_password_input.on("keyup", function() {
+            $.ajax({
+                method : "GET",
+                url : "http://localhost/dev/mvc/decorator.php?param=ajax?password="+ajax_password_input.val(),
+                success: function(response) {
+                    console.log(response);
+                }
+            });
         });
-
     });
     </script>';
 

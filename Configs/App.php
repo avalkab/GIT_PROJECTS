@@ -14,4 +14,6 @@ require_once(__ROOT.'Helpers/Functions.php');
 
 require_once('Companents.php');
 
+hook()->setIgnores();
+
 require_once('Routes.php');

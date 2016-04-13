@@ -5,7 +5,7 @@ class Route
     const PATTERN_INT = '([0-9]+)';
     const PATTERN_STR = '([a-zA-Z-_]+)';
     const PATTERN_ANY = '([\w+-_]+)';
-    const PATTERN_OPT = '/?([a-zA-Z0-9]+)?';
+    const PATTERN_OPT = '.*?([a-zA-Z0-9]+)?';
     const CONTROLLER_PATTERN = '/^([a-zA-Z]+)Controller:([a-zA-Z]+)$/';
 
     private $bootstrap;
@@ -17,17 +17,19 @@ class Route
     }
 
     public function getRouteUrl() {
-        return $this->bootstrap->url;
+        return $this->bootstrap->url_scheme['route_url'];
     }
 
     public function request($type, $url, $closure = null) {
+        hook()->setCurrentPage($this->getRouteUrl());
         hook()->mark('request_start');
         if ($this->route_handle == false) {
             $page_name = md5($url);
             $pattern_data = $this->setPattern($url);
             $this->routes[$page_name]['pattern'] = $pattern_data['pattern'];
-            if (preg_match('/'.$pattern_data['pattern'].'/', $this->getRouteUrl(), $route_matches)) {
-                print_r( $route_matches );
+            if (preg_match('/'.$pattern_data['pattern'].'/', $this->getRouteUrl())) {
+                //print_r( $route_matches );
+                preg_match('/'.$pattern_data['pattern'].'/', $this->bootstrap->url, $route_matches);
                 $this->route_handle = $page_name;
                 hook()->mark('out_compile_start');
                 if (hook()->isCompile()) {
@@ -129,7 +131,7 @@ class Route
         }else{
             //view()->error('404');
             //header('HTTP/1.0 404 Not Found', true, 404);
-            header('Location:http://localhost/dev/mvc/decorator.php?param=404');
+            //header('Location:http://localhost/dev/mvc/decorator.php?param=404');
         }
 
         hook()->mark('run_end');

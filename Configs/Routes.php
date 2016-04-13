@@ -2,14 +2,18 @@
 
 /* ANASAYFA */
 //$app->route->get('/', 'HomeController:index');
-$app->route->get('/', function($id) {
-    echo $id;
+$app->route->get('/', function() {
     return view()->setVar('page_title', 'Anasayfa')->main('home', 'main');
 });
 
 /* AJAX */
-$app->route->get('ajax?proccess={str}', function($proccess) {
-    return $proccess;
+$app->route->get('ajax{opt}', function($password) {
+    $usable = Password::valid($password);
+    if ($usable == false) {
+        return Password::getError();
+    }else{
+        return 1;
+    }
 });
 
 /* MAİL */

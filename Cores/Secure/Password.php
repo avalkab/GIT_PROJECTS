@@ -83,8 +83,8 @@ class Password extends \Singleton {
         return preg_match(self::PATTERN_TR, $this->password_str) ? 0 : 1;
     }
 
-    public function getError() {
-        return json_encode(['error' => $this->error_code]);
+    public static function getError() {
+        return json_encode(['error' => self::getInstance()->error_code]);
     }
 
     public function check() {
