@@ -14,7 +14,7 @@ class Password extends \Singleton {
     protected $password_str = null;
     protected $password_strong_level = 0;
 
-    private $error_code = 0;
+    private $error_code = -1;
     private $usable = false;
 
     /*
@@ -84,7 +84,7 @@ class Password extends \Singleton {
     }
 
     public static function getError() {
-        return json_encode(['error' => self::getInstance()->error_code]);
+        return self::getInstance()->error_code;
     }
 
     public function check() {

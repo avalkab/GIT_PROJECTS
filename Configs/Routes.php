@@ -7,12 +7,12 @@ $app->route->get('/', function() {
 });
 
 /* AJAX */
-$app->route->get('ajax{opt}', function($password) {
-    $usable = Password::valid($password);
-    if ($usable == false) {
-        return Password::getError();
+$app->route->post('passwordValidator', function() {
+    $usable = Password::valid($_POST['password']);
+    if ($usable === true) {
+        return 'ok';
     }else{
-        return 1;
+        return Password::getError();
     }
 });
 

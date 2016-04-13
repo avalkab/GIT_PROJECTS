@@ -1,18 +1,25 @@
 <?php
 function app_debug() {
-
     echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>';
-    echo '<input id="ajax_password" type="password" name="password">';
+    echo '<div id="ajax_password_wrapper"><input id="ajax_password" type="password" name="password"></div>';
     echo '<script type="text/javascript">
     $(document).ready(function(){
 
         var ajax_password_input = $("#ajax_password");
         ajax_password_input.on("keyup", function() {
             $.ajax({
-                method : "GET",
-                url : "http://localhost/dev/mvc/decorator.php?param=ajax?password="+ajax_password_input.val(),
+                method : "POST",
+                url : "http://localhost/dev/mvc/decorator.php?param=passwordValidator",
+                data : {
+                    password : ajax_password_input.val()
+                },
                 success: function(response) {
-                    console.log(response);
+                    $("#ajax_password_wrapper_message").remove();
+                    if ("ok" == response) {
+                        $("#ajax_password_wrapper").append("<strong id=\"ajax_password_wrapper_message\" style=\"background-color:#0f7; padding:5px;\">OK</strong>");
+                    }else{
+                        $("#ajax_password_wrapper").append("<strong id=\"ajax_password_wrapper_message\" style=\"background-color:#f70; padding:5px;\">NO</strong>");
+                    }
                 }
             });
         });
