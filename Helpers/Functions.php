@@ -1,5 +1,26 @@
 <?php
 function app_debug() {
+
+    echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>';
+    echo '<input id="ajax_password" type="password" name="password">';
+    echo '<script type="text/javascript">
+    $(document).ready(function(){
+
+        $.ajax({
+            method : "POST",
+            url : "http://localhost/dev/mvc/decorator.php?param=ajax?proccess=password",
+            data : {
+                "password" : $("#ajax_password").val()
+            },
+            dataType : "json",
+            success: function(response) {
+                console.log(response);
+            }
+        });
+
+    });
+    </script>';
+
     echo '<pre>
     <h1>DEBUG</h1>';
     print_r(app());
@@ -25,5 +46,5 @@ function pass_debug() {
 
 }
 
-hook()->setEvent('run_end', 'pass_debug');
-//hook()->setEvent('run_end', 'app_debug');
+//hook()->setEvent('run_end', 'pass_debug');
+hook()->setEvent('run_end', 'app_debug');

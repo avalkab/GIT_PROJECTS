@@ -1,9 +1,15 @@
 <?php
+
 /* ANASAYFA */
 //$app->route->get('/', 'HomeController:index');
-
-$app->route->get('/', function() {
+$app->route->get('/', function($id) {
+    echo $id;
     return view()->setVar('page_title', 'Anasayfa')->main('home', 'main');
+});
+
+/* AJAX */
+$app->route->get('ajax?proccess={str}', function($proccess) {
+    return $proccess;
 });
 
 /* MAİL */

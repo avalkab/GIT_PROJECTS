@@ -5,7 +5,7 @@ class Route
     const PATTERN_INT = '([0-9]+)';
     const PATTERN_STR = '([a-zA-Z-_]+)';
     const PATTERN_ANY = '([\w+-_]+)';
-    const PATTERN_OPT = '?([\w+-_]+)';
+    const PATTERN_OPT = '/?([a-zA-Z0-9]+)?';
     const CONTROLLER_PATTERN = '/^([a-zA-Z]+)Controller:([a-zA-Z]+)$/';
 
     private $bootstrap;
@@ -17,7 +17,7 @@ class Route
     }
 
     public function getRouteUrl() {
-        return $this->bootstrap->url_scheme['route_url'];
+        return $this->bootstrap->url;
     }
 
     public function request($type, $url, $closure = null) {
@@ -26,7 +26,8 @@ class Route
             $page_name = md5($url);
             $pattern_data = $this->setPattern($url);
             $this->routes[$page_name]['pattern'] = $pattern_data['pattern'];
-            if (preg_match('/'.$pattern_data['pattern'].'/', $this->getRouteUrl())) {
+            if (preg_match('/'.$pattern_data['pattern'].'/', $this->getRouteUrl(), $route_matches)) {
+                print_r( $route_matches );
                 $this->route_handle = $page_name;
                 hook()->mark('out_compile_start');
                 if (hook()->isCompile()) {
@@ -34,9 +35,10 @@ class Route
                         $reflection = new \ReflectionFunction($closure);
                         $arguments  = $reflection->getParameters();
                         if($reflection->getNumberOfParameters()>0) {
-                            $values = $this->bootstrap->url_scheme['path'];
+                            //$values = $this->bootstrap->url_scheme['path'];
+                            //$values = $route_matches;
                             foreach ($arguments as $key => $value) {
-                                $parameters[$value->name] = $values[$key+1];
+                                $parameters[$value->name] = $route_matches[$key+1];
                             }
                             $this->routes[$page_name]['vars']  = $parameters;
                             $this->routes[$page_name]['response'] = call_user_func_array($closure, $parameters);
@@ -79,6 +81,7 @@ class Route
     }
 
     private function setPattern($url) {
+        $url = str_replace('?', '\?', $url);
         if (preg_match(self::PATTERN_PARAM, $url)) {
             preg_match_all(self::PATTERN_PARAM, $url, $matches);
             foreach ($matches[0] as $key => $value) {
@@ -124,9 +127,9 @@ class Route
         if ($this->route_handle) {
             echo $this->getResponse();
         }else{
-            view()->error('404');
+            //view()->error('404');
             //header('HTTP/1.0 404 Not Found', true, 404);
-            //header('Location:http://localhost/dev/mvc/decorator.php?param=404');
+            header('Location:http://localhost/dev/mvc/decorator.php?param=404');
         }
 
         hook()->mark('run_end');

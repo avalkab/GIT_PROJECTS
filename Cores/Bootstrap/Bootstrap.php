@@ -4,12 +4,9 @@ class Bootstrap {
     public $url_scheme = null;
 
     function __construct() {
-        $this->url = $_REQUEST['param'];
+        $this->url = empty($_REQUEST['param']) ? '/' : $_REQUEST['param'];
         $this->url_scheme = $this->parseUrl();
-        $this->url_scheme['route_url'] = is_array($this->url_scheme['path'])
-        ? implode('/', $this->url_scheme['path'])
-        : $this->url_scheme['path'];
-
+        $this->url_scheme['route_url'] = is_array($this->url_scheme['path']) ? implode('/', $this->url_scheme['path']) : $this->url_scheme['path'];
     }
 
     public function parseUrl() {

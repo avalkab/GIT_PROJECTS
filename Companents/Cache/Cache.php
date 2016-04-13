@@ -18,7 +18,7 @@ class Cache extends \ACompanentAdapter implements \ICompanent {
 
     /* ÖNBELLEK YÖNETİMİ */
     public function startCache() {
-        hook()->allowCompile(0);
+        hook()->allowCompile(1);
         $this->debug = 0;
         $this->handle = route()->getRouteUrl();
 
@@ -56,7 +56,7 @@ class Cache extends \ACompanentAdapter implements \ICompanent {
         echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
         <script>
         function isTimeUp(t) {
-            if (t <= 0 || isNaN(t) || t == undefined) { location.reload(); }
+            if (t <= 0 || isNaN(t) || t == undefined) { /* location.reload(); */ }
         }
         $(document).ready(function(){
             var s = $("#cache_time strong").eq(0);

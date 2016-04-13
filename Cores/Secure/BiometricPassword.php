@@ -72,6 +72,7 @@ class BiometricPassword extends Password {
             var password_input = $("'.$password_input_name.'");
             var password = new Array();
             var run = false;
+            var start_time = 0;
             var char;
 
             // Başla
@@ -81,11 +82,9 @@ class BiometricPassword extends Password {
 
                 if(!checkChar(char)) { return false; }
 
-                password[char] = {
-                    "char" : char,
-                    "start_speed" : event.timeStamp,
-                    "end_speed" : 0
-                };
+                if (0 == start_time) {
+                    start_time = event.timeStamp;
+                }
 
                 console.log(event);
 
@@ -97,17 +96,20 @@ class BiometricPassword extends Password {
 
                 if(!checkChar(char)) { return false; }
 
-                var id = $(this).attr("id");
-
-                if ("bio_pas_end" == id) {
-                    $(".bio-pass-wrapper").append("<button class=\"bio-button\">Onayla</button>");
-                }
-
                 var index = $(this).attr("tabindex");
                 $(this).addClass("bio-disabled").attr("disabled", "disabled");
                 $(this).next("input").select();
 
-                password[char].end_speed = event.timeStamp;
+                if ("bio_pas_end" == $(this).attr("id")) {
+                    $(".bio-pass-wrapper").append("<button class=\"bio-button\">Onayla</button>");
+                }
+
+                password[char] = {
+                    "char" : char,
+                    "speed" : parseInt(event.timeStamp-start_time)
+                };
+
+                start_time = 0;
 
                 console.log(password);
 
