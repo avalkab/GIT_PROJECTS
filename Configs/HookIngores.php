@@ -1,3 +1,4 @@
 <?php return [
-    'passwordValidator'
+    'ajax/passwordValidator',
+    'ajax/login',
 ];

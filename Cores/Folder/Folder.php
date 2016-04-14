@@ -27,7 +27,7 @@ class Folder extends \Singleton {
 
             }
         }
-        return $files;
         closedir($folder);
+        return $files;
     }
 }

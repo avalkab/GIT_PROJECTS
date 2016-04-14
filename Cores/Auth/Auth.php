@@ -2,10 +2,6 @@
 
 class Auth extends \BaseModel implements \IAuth {
 
-    protected $is_login = 0;
-    protected $last_login_date;
-    protected $member;
-
     protected $login_sql = 'SELECT %s FROM %s WHERE %s LIMIT 1';
 
     function __construct($type, $table, Array $fillable = null) {
@@ -22,19 +18,29 @@ class Auth extends \BaseModel implements \IAuth {
     }
 
     public function login() {
-        echo 'Logged';
+        if (!$_SESSION['is_login']) {
+            $logged = db()->query($this->login_sql);
+            if ($logged) {
+                $_SESSION['is_login'] = 1;
+                $this->setMember();
+                $_SESSION['login_date'] = date('d-m-Y H:i:s');
+            }
+            return $logged;
+        }else{
+            return true;
+        }
     }
 
     public function isLogin() {
-        return ($this->is_login) ? true : false;
+        return ($_SESSION['is_login']) ? true : false;
     }
 
-    public function lastLoginDate() {
-        return $last_login_date;
+    public function setMember() {
+        $_SESSION['member'] = db()->get_row($this->login_sql);
     }
 
     public function getMember() {
-        return $this->isLogin() ? $this->member : false;
+        return $this->isLogin() ? (object)$_SESSION['member'] : false;
     }
 
     public function setLoginSql($sql_str) {
@@ -49,7 +55,7 @@ class Auth extends \BaseModel implements \IAuth {
                 $w[$key] = $key.'=\''.$this->{$value}.'\'';
             }
             $w = implode(' AND ', $w);
-        } else if (is_string()) {
+        } else if (is_string($where_cols)) {
            $w = $where_cols;
         }
 

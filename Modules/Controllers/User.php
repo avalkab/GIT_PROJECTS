@@ -4,14 +4,24 @@ class UserController extends \Auth {
 
     function __construct() {
         $this->prepare(
-            'GET',
-            'users',
+            'POST',
+            'kullanicilar',
             [
                 'username' => ['type' => 'str', 'min' => 2, 'max' => 30 ],
-                'password' => ['type' => 'str', 'min' => 2, 'max' => 30, 'hash' => true ]
+                'password' => ['type' => 'str', 'min' => 2, 'max' => 30, 'hash' => true, 'password' => true ]
             ]
         );
-        $this->buildLoginSql(['*'], ['username' => 'username', 'password_md5' => 'password']);
+        $this->buildLoginSql(
+            ['*'],
+            [
+                'username' => 'username',
+                'sifre_hash' => 'password'
+            ]
+        );
     }
 
+    public static function member() {
+        $sub_class = new self;
+        return $sub_class->getMember();
+    }
 }

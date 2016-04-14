@@ -91,4 +91,49 @@ class Password extends \Singleton {
         return ($this->usable) ? true : false;
     }
 
+    public static function createElement($name = 'password', $url, $jquery = true) {
+        if ($jquery == true) {
+            echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>';
+        }
+        echo '<div id="ajax_password_wrapper" style="position:relative; width:200px;">
+            <div style="position:relative; width:100%; height:2px; overflow:hidden;">
+            <div id="ajax_password_mask" style="position:absolute; left:0; top:0; width:100%; height:100%; background-color:#ccc;z-index:999;"></div>
+            <span style="position:absolute; left:0; top:0; width:100%; height:100%;
+            background: #ff0000;
+            background: -moz-linear-gradient(left,  #ff0000 0%, #ff9900 50%, #00ff7f 100%);
+            background: -webkit-linear-gradient(left,  #ff0000 0%,#ff9900 50%,#00ff7f 100%);
+            background: linear-gradient(to right,  #ff0000 0%,#ff9900 50%,#00ff7f 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#ff0000", endColorstr="#00ff7f",GradientType=1 );
+            "></span>
+            </div>
+            <input id="ajax_password" style="width:100%; border:1px solid #ccc; background-color:#f5f5f5; padding:4px 9px; outline:0; box-sizing:border-box;" type="password" name="'.$name.'">
+        </div>';
+        echo '<script type="text/javascript">
+        $(document).ready(function(){
+
+            var ajax_password_input = $("#ajax_password");
+            ajax_password_input.on("keyup", function(e) {
+                $.ajax({
+                    method : "POST",
+                    url : "http://localhost/dev/mvc/decorator.php?param='.$url.'",
+                    data : {
+                        password : ajax_password_input.val()
+                    },
+                    success: function(response) {
+                        $("#ajax_password_wrapper_message").remove();
+                        $("#ajax_password_mask").animate({ marginLeft : "100%" }, 50);
+                        if ("ok" == response) {
+                            $("#ajax_password_wrapper").append("<strong id=\"ajax_password_wrapper_message\" style=\"position:absolute; width:16px; height:16px; right:4px;top:5px;text-align:center;background-color:#0f3; color:#fff; line-height:16px;font-size:11px; border-radius:50%;text-indent:-2px;\">✓</strong>");
+                            $("#ajax_password_mask").animate({ marginLeft : "100%" }, 50);
+                        }else{
+                            $("#ajax_password_wrapper").append("<strong id=\"ajax_password_wrapper_message\" style=\"position:absolute; width:16px; height:16px; right:4px;top:5px;text-align:center;background-color:#f30; color:#fff; line-height:14px;font-size:11px; border-radius:50%;text-indent:0;\">x</strong>");
+                            $("#ajax_password_mask").animate({ marginLeft : (response*30)+"px" }, 50);
+                        }
+                    }
+                });
+            });
+        });
+        </script>';
+    }
+
 }

@@ -6,13 +6,25 @@ $app->route->get('/', function() {
     return view()->setVar('page_title', 'Anasayfa')->main('home', 'main');
 });
 
+
+
 /* AJAX */
-$app->route->post('passwordValidator', function() {
-    $usable = Password::valid($_POST['password']);
-    if ($usable === true) {
-        return 'ok';
-    }else{
-        return Password::getError();
+$app->route->post('ajax/{str}', function($type) {
+    switch ($type) {
+        case 'passwordValidator':
+            $usable = Password::valid($_POST['password']);
+            if ($usable === true) {
+                return 'ok';
+            }else{
+                return Password::getError();
+            }
+        break;
+
+        case 'login':
+            $user = new User;
+            $user->login();
+            print_r( User::member() );
+        break;
     }
 });
 
