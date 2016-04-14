@@ -18,12 +18,12 @@ class Auth extends \BaseModel implements \IAuth {
     }
 
     public function login() {
-        if (!$_SESSION['is_login']) {
+        if (!$this->isLogin()) {
             $logged = db()->query($this->login_sql);
             if ($logged) {
-                $_SESSION['is_login'] = 1;
+                $_SESSION['user']['is_login'] = 1;
                 $this->setMember();
-                $_SESSION['login_date'] = date('d-m-Y H:i:s');
+                $_SESSION['user']['login_date'] = date('d-m-Y H:i:s');
             }
             return $logged;
         }else{
@@ -31,16 +31,20 @@ class Auth extends \BaseModel implements \IAuth {
         }
     }
 
+    public function logout() {
+        unset($_SESSION['user']);
+    }
+
     public function isLogin() {
-        return ($_SESSION['is_login']) ? true : false;
+        return ($_SESSION['user']['is_login']) ? true : false;
     }
 
     public function setMember() {
-        $_SESSION['member'] = db()->get_row($this->login_sql);
+        $_SESSION['user']['attr'] = db()->get_row($this->login_sql);
     }
 
     public function getMember() {
-        return $this->isLogin() ? (object)$_SESSION['member'] : false;
+        return $this->isLogin() ? (object)$_SESSION['user'] : false;
     }
 
     public function setLoginSql($sql_str) {

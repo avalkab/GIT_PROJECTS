@@ -1,13 +1,5 @@
 <?php
 
-/* ANASAYFA */
-//$app->route->get('/', 'HomeController:index');
-$app->route->get('/', function() {
-    return view()->setVar('page_title', 'Anasayfa')->main('home', 'main');
-});
-
-
-
 /* AJAX */
 $app->route->post('ajax/{str}', function($type) {
     switch ($type) {
@@ -22,11 +14,22 @@ $app->route->post('ajax/{str}', function($type) {
 
         case 'login':
             $user = new User;
-            $user->login();
-            print_r( User::member() );
+            return $user->login();
+        break;
+
+        case 'logout':
+            $user = new User;
+            $user->logout();
         break;
     }
 });
+
+/* ANASAYFA */
+//$app->route->get('/', 'HomeController:index');
+$app->route->get('/', function() {
+    return view()->setVar('page_title', 'Anasayfa')->main('home', 'main');
+});
+
 
 /* MAİL */
 $app->route->get('mail', function() {

@@ -1,6 +1,6 @@
 <?php
 function app_debug() {
-
+    /*
     echo '<form method="post" action="ajax/login" onsubmit="return false;">';
     echo '<h3>Üye girişi</h3>';
     echo '<input id="username" type="text" name="username" maxlenght="24">';
@@ -10,13 +10,10 @@ function app_debug() {
     ?>
     <script type="text/javascript">
     $(document).ready(function(){
-
         $("#login").click(function(){
-
             var form = $(this).parent('form');
             var i_username = form.find('#username').val();
             var i_password = form.find('#ajax_password').val();
-
             $.ajax({
                 method : 'POST',
                 url : 'http://localhost/dev/mvc/decorator.php?param=ajax/login',
@@ -26,18 +23,16 @@ function app_debug() {
                 },success:function(response) {
                     console.log(response);
                 }
-
             });
-
         });
-
     });
     </script>
     <?php
     //Password::createElement('password', 'ajax/passwordValidator', true);
+    */
+
     echo '<pre>
     <h1>DEBUG</h1>';
-    print_r($user);
     print_r(app());
     echo '</pre>';
 }
