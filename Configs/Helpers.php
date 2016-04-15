@@ -35,3 +35,7 @@ function request() {
 function html() {
     return Html::getInstance();
 }
+
+function mailer() {
+    return new Mail;
+}

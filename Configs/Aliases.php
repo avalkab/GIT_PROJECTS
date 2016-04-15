@@ -20,6 +20,7 @@ $paths = [
     'Log'                   => 'Cores/Log/',
     'Request'               => 'Cores/Request/',
 
+
     /* Companents */
     'Companent'             => 'Cores/Companent/',
     'CompanentBuilder'      => 'Cores/Companent/core/',
@@ -66,6 +67,7 @@ $alias = [
     'BiometricPassword'     => '\ERA\Core\Secure\BiometricPassword',
     'Log'                   => '\ERA\Core\Log',
     'Request'               => '\ERA\Core\Request',
+
 
     /* Companents */
     'Companent'             => '\ERA\Core\Companent',

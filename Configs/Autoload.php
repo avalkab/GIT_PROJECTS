@@ -13,4 +13,9 @@
         }
     }
 
+    function autoload_mail($class) {
+        include_once(__ROOT . 'Cores/Mail/'.$class.'.php');
+    }
+
     spl_autoload_register('autoload');
+    spl_autoload_register('autoload_mail');
