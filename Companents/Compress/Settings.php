@@ -1,6 +1,7 @@
 <?php return [
+    'running' => true,
     'events' => [
-        'compile_response' => 'start',
+        'request_end' => 'start',
         'run_end' => 'end'
     ]
 ];
