@@ -31,6 +31,8 @@ function app_debug() {
     //Password::createElement('password', 'ajax/passwordValidator', true);
     */
 
+    logger()->set('test');
+
     echo '<pre>
     <h1>DEBUG</h1>';
     print_r(app());

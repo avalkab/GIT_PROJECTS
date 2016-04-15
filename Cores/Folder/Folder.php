@@ -6,6 +6,16 @@ class Folder extends \Singleton {
         return 1;
     }
 
+    public function isFolder($folder) {
+        return is_dir($folder) ? true : false;
+    }
+
+    public function create($folder) {
+        if ($this->isFolder($folder) === false) {
+            mkdir($folder, 0777, true);
+        }
+    }
+
     public function listFiles($dir) {
         $file_instance = \File::getInstance();
         $folder = opendir($dir);

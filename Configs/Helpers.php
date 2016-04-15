@@ -23,3 +23,7 @@ function companent() {
 function db() {
     return DB::getInstance()->db;
 }
+
+function logger() {
+    return Log::getInstance();
+}
