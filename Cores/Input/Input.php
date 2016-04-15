@@ -1,27 +1,41 @@
 <?php namespace ERA\Core;
 
-class Input extends \Singleton {
+class Html extends \Singleton {
 
-    /* GET */
-    public function getRequestData($type, $key = null) {
-        switch ($type) {
-            case 'POST'     : $data = is_string($key) ? $_POST[$key] : $_POST; break;
-            case 'GET'      : $data = is_string($key) ? $_GET[$key] : $_GET; break;
-            case 'REQUEST'  : $data = is_string($key) ? $_REQUEST[$key] : $_REQUEST; break;
+    public function createElement($tagname, $parameters = null, $content = null, $is_end = true) {
+        $element = '<'.$tagname.' '.$this->getParameters($parameters).'>'.$content;
+        if ($is_end == true) {
+            $element .= $this->closeElement($tagname);
         }
-        return $data;
+        return $element;
     }
 
-    public function post($key = null) {
-        return $this->getRequestData('POST', $key);
+    public function closeElement($tagname) {
+        return '</'.$tagname.'>';
     }
 
-    public function get($key = null) {
-        return $this->getRequestData('GET', $key);
+    public function getParameters($parameters = null) {
+        if (is_null($parameters)) {
+            $parameters = ['id' => 'ERA_INPT_'.time()];
+        }
+        foreach ($parameters as $key => $value) {
+            $param .= $key.'="'.$value.'" ';
+        }
+        return rtrim($param, ' ');
     }
 
-    public function request($key = null) {
-        return $this->getRequestData('REQUEST', $key);
+}
+
+class Input extends Request {
+
+    private $html;
+
+    function __construct() {
+        $this->html = Html::getInstance();
+    }
+
+    public function create($tagname, Array $parameters = null, $content, $is_end = true) {
+        return $this->html->createElement($tagname, $parameters, $content, $is_end);
     }
 
 }

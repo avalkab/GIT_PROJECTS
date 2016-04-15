@@ -27,3 +27,7 @@ function db() {
 function logger() {
     return Log::getInstance();
 }
+
+function request() {
+    return Request::getInstance();
+}

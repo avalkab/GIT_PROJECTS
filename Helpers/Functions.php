@@ -31,7 +31,7 @@ function app_debug() {
     //Password::createElement('password', 'ajax/passwordValidator', true);
     */
 
-    logger()->set('test');
+    echo Input::getInstance()->create('input', null, null, false);
 
     echo '<pre>
     <h1>DEBUG</h1>';
