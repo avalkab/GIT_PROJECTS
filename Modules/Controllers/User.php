@@ -1,7 +1,6 @@
 <?php namespace ERA\Controllers;
 
 class UserController extends \Auth {
-
     function __construct() {
         $this->prepare(
             'POST',

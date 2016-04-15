@@ -54,5 +54,25 @@ function pass_debug() {
     BiometricPassword::init('.bio-pass');
 }
 
-//hook()->setEvent('run_end', 'pass_debug');
+function image($url, $watermark = false) {
+    $handle = new Image($url);
+    $handle->jpeg_quality = 70;
+    $handle->file_new_name_body = 'image_resized';
+    $handle->image_resize       = true;
+    $handle->image_x            = 100;
+    $handle->image_ratio_y      = true;
+
+    if ($watermark == true) {
+        $handle->image_watermark = 'watermark.png';
+        $handle->image_watermark_position = 'BR';
+    }
+
+    header('Content-type: ' . $handle->file_src_mime);
+    echo $handle->process();
+    die();
+}
+
 hook()->setEvent('run_end', 'app_debug');
+//hook()->setEvent('run_end', 'pass_debug');
+//hook()->setEvent('document_top', 'image', [__ROOT.'sample.jpg', true]);
+//image(__ROOT.'sample.jpg', false);

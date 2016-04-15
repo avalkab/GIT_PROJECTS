@@ -18,7 +18,7 @@ class Cache extends \ACompanentAdapter implements \ICompanent {
 
     /* ÖNBELLEK YÖNETİMİ */
     public function startCache() {
-        hook()->allowCompile(1);
+        hook()->allowCompile(0);
         $this->debug = 0;
         $this->handle = route()->getRouteUrl();
 
@@ -37,6 +37,7 @@ class Cache extends \ACompanentAdapter implements \ICompanent {
         $data = '<p id="cache_time" style="display:inline-block; font-size:11px; padding:0 6px; background-color:#fc0; border-radius:2px;">Önbellek';
         $data .= ' : <strong color="white">'.($this->fileMT()-time()).'sn</strong></p> ';
         $data .= $this->getCacheFile();
+        $data .= $this->cacheExpireCounter();
         route()->setResponse($data);
 
     }
@@ -53,7 +54,7 @@ class Cache extends \ACompanentAdapter implements \ICompanent {
     }
 
     public function cacheExpireCounter() {
-        echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+        return '<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
         <script>
         function isTimeUp(t) {
             if (t <= 0 || isNaN(t) || t == undefined) { /* location.reload(); */ }
@@ -64,7 +65,7 @@ class Cache extends \ACompanentAdapter implements \ICompanent {
                 t = t.replace("sn", "");
                 t = parseInt(t,10);
 
-            isTimeUp(t)
+            isTimeUp(t);
             setInterval(function(){
                 isTimeUp(t);
                 t -= 1;

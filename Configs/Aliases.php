@@ -14,6 +14,7 @@ $paths = [
     'Url'                   => 'Cores/Url/',
     'Input'                 => 'Cores/Input/',
     'DB'                    => 'Cores/DB/',
+    'Image'                 => 'Cores/Image/',
     'Password'              => 'Cores/Secure/',
     'BiometricPassword'     => 'Cores/Secure/',
 
@@ -28,6 +29,7 @@ $paths = [
     /* Installed companents */
     'Cache'                 => 'Companents/Cache/',
     'CommentBlocker'        => 'Companents/CommentBlocker/',
+    'Compress'              => 'Companents/Compress/',
 
     /* Controllers */
     'BaseController'        => 'Bases/',
@@ -57,6 +59,7 @@ $alias = [
     'Url'                   => '\ERA\Core\Url',
     'Input'                 => '\ERA\Core\Input',
     'DB'                    => '\ERA\Core\DB',
+    'Image'                 => '\ERA\Core\Image',
     'Password'              => '\ERA\Core\Secure\Password',
     'BiometricPassword'     => '\ERA\Core\Secure\BiometricPassword',
 
@@ -71,6 +74,7 @@ $alias = [
     /* Installed companents */
     'Cache'                 => '\ERA\Companents\Cache',
     'CommentBlocker'        => '\ERA\Companents\CommentBlocker',
+    'Compress'              => '\ERA\Companents\Compress',
 
     /* Controllers */
     'BaseController'        => '\ERA\Bases\BaseController',
