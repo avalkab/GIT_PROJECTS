@@ -1,4 +1,14 @@
 <?php
+function login_form(){
+    $form .= html()->createElement('form', ['method' => 'post', 'action' => 'http://localhost/dev/mvc/decorator.php?param=ajax/login'], $inputs, false);
+    $form .= html()->createElement('input', ['type' => 'text', 'name' => 'username', 'placeholder' => 'Kullanıcı adı'], null, false);
+    $form .= html()->createElement('input', ['type' => 'password', 'name' => 'password', 'placeholder' => 'Şifre'], null, false);
+    $form .= html()->createElement('input', ['type' => 'submit', 'name' => 'submit_login_form', 'value' => 'Giriş Yap'], null, false);
+    $form .= html()->createElement('input', ['type' => 'hidden', 'name' => 'token', 'value' => md5(microtime())], null, false);
+    $form .= html()->closeElement('form');
+    echo $form;
+}
+
 function app_debug() {
     /*
     echo '<form method="post" action="ajax/login" onsubmit="return false;">';
@@ -30,8 +40,6 @@ function app_debug() {
     <?php
     //Password::createElement('password', 'ajax/passwordValidator', true);
     */
-
-    echo Input::getInstance()->create('input', null, null, false);
 
     echo '<pre>
     <h1>DEBUG</h1>';

@@ -42,7 +42,7 @@ class BaseModel {
 
     public function setRequestData() {
         $rm = strtoupper($this->request_method);
-        $input = \Input::getInstance()->getRequestData($rm);
+        $input = (array)request()->getRequest($rm);
         $fillable_keys = array_keys($this->fillable);
         if (sizeof($fillable_keys)>1) {
             foreach ($fillable_keys as $value) {

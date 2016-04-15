@@ -1,7 +1,7 @@
 <?php namespace ERA\Core;
 
 class Request extends \Singleton {
-      private function getRequest($type = 'GET', $key = null) {
+      public function getRequest($type = 'POST', $key = null) {
             switch ($type) {
                   case 'GET':
                         $response = ($key) ? $_GET[$key] : (object)$_GET;

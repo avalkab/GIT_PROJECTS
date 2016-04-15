@@ -31,3 +31,7 @@ function logger() {
 function request() {
     return Request::getInstance();
 }
+
+function html() {
+    return Html::getInstance();
+}
