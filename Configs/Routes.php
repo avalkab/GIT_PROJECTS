@@ -26,7 +26,7 @@ $app->route->post('ajax/{str}', function($type) {
 
 /* ANASAYFA */
 //$app->route->get('/', 'HomeController:index');
-$app->route->get('/', function() {
+$app->route->any('/', function() {
     return view()->setVar('page_title', 'Anasayfa')->main('home', 'main');
 });
 

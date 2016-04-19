@@ -57,7 +57,7 @@ class Cache extends \ACompanentAdapter implements \ICompanent {
         return '<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
         <script>
         function isTimeUp(t) {
-            if (t <= 0 || isNaN(t) || t == undefined) { location.reload(); }
+            if (t <= 0 || isNaN(t) || t == undefined) { /* location.reload(); */ }
         }
         $(document).ready(function() {
             var s = $("#cache_time strong").eq(0);

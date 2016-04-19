@@ -1,12 +1,12 @@
 <?php
-function login_form(){
-    $form .= html()->createElement('form', ['method' => 'post', 'action' => 'http://localhost/dev/mvc/decorator.php?param=ajax/login'], $inputs, false);
-    $form .= html()->createElement('input', ['type' => 'text', 'name' => 'username', 'placeholder' => 'Kullanıcı adı'], null, false);
-    $form .= html()->createElement('input', ['type' => 'password', 'name' => 'password', 'placeholder' => 'Şifre'], null, false);
-    $form .= html()->createElement('input', ['type' => 'submit', 'name' => 'submit_login_form', 'value' => 'Giriş Yap'], null, false);
-    $form .= html()->createElement('input', ['type' => 'hidden', 'name' => 'token', 'value' => md5(microtime())], null, false);
-    $form .= html()->closeElement('form');
-    echo $form;
+function login_form($method) {
+    echo html()->createElement('form',['id' => 'loginForm','method' => $method, 'action' => 'http://localhost'.__REQ, 'csrf' => true], null, false)
+    ->createElement('input', ['type' => 'text', 'name' => 'username', 'placeholder' => 'Kullanıcı adı'], null, false)
+    ->createElement('input', ['type' => 'password', 'name' => 'password', 'placeholder' => 'Şifre'], null, false)
+    ->createElement('input', ['type' => 'submit', 'name' => 'submit_login_form', 'value' => 'Giriş Yap'], null, false)
+    ->closeElement('form')
+    ->getElements();
+    return html()->isValidToken();
 }
 
 function app_debug() {
@@ -39,6 +39,11 @@ function app_debug() {
     </script>
     <?php
     //Password::createElement('password', 'ajax/passwordValidator', true);
+    */
+
+    /*
+    $post_status = login_form('POST');
+    echo 'POST STATUS : '.$post_status;
     */
 
     echo '<pre>
