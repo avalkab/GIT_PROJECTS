@@ -46,7 +46,7 @@ class BaseModel {
         $fillable_keys = array_keys($this->fillable);
         if (sizeof($fillable_keys)>1) {
             foreach ($fillable_keys as $value) {
-                $this->request_data[$value] = ($this->fillable[$value]['hash']) ? md5($input[$value]) : $input[$value];
+                $this->request_data[$value] = !empty($input[$value]) ? ($this->fillable[$value]['hash']) ? md5($input[$value]) : $input[$value] : '';
             }
         }
     }
