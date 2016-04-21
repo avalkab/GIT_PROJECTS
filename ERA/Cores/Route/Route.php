@@ -51,7 +51,7 @@ class Route
                     }else{
                         if (preg_match(self::CONTROLLER_PATTERN, $closure, $matches)) {
                             $controller_name = $matches[1].'Controller';
-                            require_once('Modules/Controllers/'.$controller_name.'.php');
+                            require_once(__ERA.'Modules/Controllers/'.$controller_name.'.php');
                             $this->routes[$page_name]['response'] = call_user_method($matches[2], new $controller_name());
                         }
                     }

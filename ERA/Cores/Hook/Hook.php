@@ -19,7 +19,20 @@ class Hook extends \Singleton {
     }
 
     public function isIgnore() {
-        return in_array($this->current_page, $this->ignore_collection) ? true : false;
+        $handle = false;
+        foreach ($this->ignore_collection as $key => $value) {
+            if (strstr($value, '/*')) {
+                $regex = '/'.str_replace('/*', '\/(.*)', $value).'/';
+                if (preg_match($regex, $this->current_page)) {
+                    $handle = true;
+                    break;
+                }
+            }else if ($value == $this->current_page) {
+                $handle = true;
+                break;
+            }
+        }
+        return $handle;
     }
 
     public function mark($name) {
