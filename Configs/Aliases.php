@@ -21,6 +21,7 @@ $paths = [
     'BiometricPassword'     => 'Cores/Secure/',
     'Log'                   => 'Cores/Log/',
     'Request'               => 'Cores/Request/',
+    'Translate'             => 'Cores/Translate/',
 
 
     /* Companents */
@@ -70,6 +71,7 @@ $alias = [
     'BiometricPassword'     => '\ERA\Core\Secure\BiometricPassword',
     'Log'                   => '\ERA\Core\Log',
     'Request'               => '\ERA\Core\Request',
+    'Translate'             => '\ERA\Core\Translate',
 
 
     /* Companents */

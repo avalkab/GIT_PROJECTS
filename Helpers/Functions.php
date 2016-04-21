@@ -46,6 +46,8 @@ function app_debug() {
     echo 'POST STATUS : '.$post_status;
     */
 
+    echo translate('home');
+
     echo '<pre>
     <h1>DEBUG</h1>';
     print_r(app());

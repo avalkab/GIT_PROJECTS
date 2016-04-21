@@ -8,17 +8,17 @@ class File extends \Singleton {
         }
     }
 
-    private function proccess($method, Array $params = null) {
+    public function proccess($method, Array $params = null) {
         if ($this->exist($params[0]) || $method == 'create') {
             return call_user_method_array($method, $this, $params);
         }
     }
 
-    private function delete($filename) {
+    public function delete($filename) {
         return unlink($filename);
     }
 
-    private function create($filename, $chmod = 0777) {
+    public function create($filename, $chmod = 0777) {
         $t = touch($filename);
         if ($t) {
             chmod($filename, $chmod);
@@ -26,23 +26,25 @@ class File extends \Singleton {
         return $t;
     }
 
-    private function getFileSize($filename) {
+    public function getFileSize($filename) {
         return filesize($filename);
     }
 
-    private function modifiedTime($filename) {
+    public function modifiedTime($filename) {
         return filemtime($filename);
     }
 
-    private function set($filename, $data) {
+    public function set($filename, $data) {
         return file_put_contents($filename, $data);
     }
 
-    private function get($filename) {
+    public function get($filename) {
         return file_get_contents($filename);
     }
 
-    private function exist($filename = null) {
-        return !empty($filename) ? file_exists($filename) ?1 :0 :0;
+    public function exist($filename = null) {
+        return !empty($filename) ?
+                    file_exists($filename) ? 1 : 0
+                : 0;
     }
 }

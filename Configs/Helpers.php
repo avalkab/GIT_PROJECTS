@@ -39,3 +39,10 @@ function html() {
 function mailer() {
     return new Mail;
 }
+
+function translate($key) {
+    if (!is_string($key)) {
+        return false;
+    }
+    return Translate::getInstance(['language' => 'tr'])->getVar($key);
+}

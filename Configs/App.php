@@ -11,7 +11,6 @@ $app->registerArray([
 ]);
 
 require_once(__ROOT.'Helpers/Functions.php');
-
 require_once('Companents.php');
 
 hook()->setIgnores();
