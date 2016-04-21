@@ -1,24 +1,7 @@
-<?php
-    function __autoload($class) {
-        echo $class;
-    }
+<?php error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED & ~E_STRICT);
 
-    include('helpers/Patterns/Singleton/Singleton.php');
-    include('cores/App/core/AppFactory.php');
-    include('cores/App/App.php');
+require_once('ERA/Configs/Start.php');
 
-    $app = Era\Core\App\App::instance();
-    $companent = $app->factory->buildCompanent();
+$app->route->run();
 
-    class DrumSet extends ACompanentAdapter implements ICompanent {
-        public $version = '1.1.21';
-    }
-
-    $companent->bind('drumSet', new DrumSet);
-    echo $companent->drumset->getVersion();
-
-
-    echo '<pre>';
-    print_r($app);
-    print_r($companent);
-    echo '</pre>';
+?>
