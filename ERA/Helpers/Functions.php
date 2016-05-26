@@ -1,12 +1,25 @@
 <?php
 function login_form($method) {
-    echo html()->createElement('form',['id' => 'loginForm','method' => $method, 'action' => 'http://localhost'.__REQ, 'csrf' => true], null, false)
+    echo html()
+    ->createElement('form',['id' => 'loginForm','method' => $method, 'action' => 'http://localhost'.__REQ, 'csrf' => true], null, false)
     ->createElement('input', ['type' => 'text', 'name' => 'username', 'placeholder' => 'Kullanıcı adı'], null, false)
     ->createElement('input', ['type' => 'password', 'name' => 'password', 'placeholder' => 'Şifre'], null, false)
     ->createElement('input', ['type' => 'submit', 'name' => 'submit_login_form', 'value' => 'Giriş Yap'], null, false)
     ->closeElement('form')
     ->getElements();
     return html()->isValidToken();
+}
+
+function searchForm($method = 'POST') {
+    $token_value = html()->guard->store('headerSearchToken');
+
+    html()
+    ->createElement('form',['id' => 'headerSearchForm','method' => 'GET', 'action' => __WEBROOT.'arama', 'csrf' => false], null, false)
+    ->createElement('input', ['class' => 'q', 'type' => 'text', 'name' => 'q', 'placeholder' => 'Senin için ne yapabilirim?'], null, false)
+    ->createElement('input', ['type' => 'hidden', 'name' => 'headerSearchToken', 'value' => $token_value], null, false)
+    ->closeElement('form');
+
+    echo html()->getElements();
 }
 
 function app_debug() {
@@ -89,7 +102,33 @@ function image($url, $watermark = false) {
     die();
 }
 
-hook()->setEvent('run_end', 'app_debug');
+function banners() {
+    $banners = app()->factory('BannerController')->getBanners([
+        'cols' => 'baslik,spot,url,gorsel_url',
+        'limit' => 5,
+    ]);
+    return view()->setVars(['banners' => $banners])->template('banner');
+}
+
+function commentsWidget($limit = 5) {
+    return app()->factory('CommentsController')->getComments([
+        'cols' => 'username,post_id,comment_id,yorum,tablo_adi',
+        'where' => 'WHERE aktif = 1',
+        'limit' => $limit
+    ]);
+}
+
+function postTitle($id, $table, $is_slug = false) {
+    $title = app()->factory('PostController')->getPostTitle($id, $table);
+    if ($is_slug === true) {
+        $title = Slug::make($title);
+    }
+    return $title;
+}
+
+hook()->setEvent('page_top', 'banners');
+
+//hook()->setEvent('run_end', 'app_debug');
 //hook()->setEvent('run_end', 'pass_debug');
 //hook()->setEvent('document_top', 'image', [__ROOT.'sample.jpg', true]);
 //image(__ROOT.'sample.jpg', false);

@@ -8,17 +8,13 @@ class FormGuard extends \Singleton {
         $type = strtoupper($type);
         $token_value = request()->getRequest($type, $token_name);
         if (request()->validMethod($type)) {
-            if ($this->validate($token_name, $token_value)) {
-                $this->token_status = 1;
-            }else{
-                $this->token_status = 0;
-            }
+            $this->token_status = $this->validate($token_name, $token_value);
         }
         return $this->store($token_name);
     }
 
     public function generate() {
-        return md5(uniqid());
+        return md5(time());
     }
 
     public function validate($token_name, $token_value) {
@@ -28,6 +24,10 @@ class FormGuard extends \Singleton {
     public function store($token_name) {
         session_unset();
         return $_SESSION['tokens'][$token_name] = $this->generate();
+    }
+
+    public function getTokenStatus() {
+        return $this->token_status;
     }
 
     public function debug() {

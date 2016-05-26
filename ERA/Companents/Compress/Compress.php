@@ -15,7 +15,15 @@ class Compress extends \ACompanentAdapter implements \ICompanent {
     }
 
     private function pressIt() {
-        return $this->running() ? preg_replace('/\s+/', ' ', route()->getResponse()) : route()->getResponse();
+        if ($this->running()) {
+            $data = preg_replace('/\s+/', ' ', route()->getResponse());
+            $data = str_replace('> <', '><', $data);
+            $data = preg_replace('/<!--(.|\s)*?-->/', '', $data);
+            $data = trim($data);
+        }else{
+            $data = route()->getResponse();
+        }
+        return $data;
     }
 
 }

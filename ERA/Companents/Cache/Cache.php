@@ -27,14 +27,14 @@ class Cache extends \ACompanentAdapter implements \ICompanent {
 
         if ($this->isExpired() && hook()->isCompile() == 0) {
             $this->reCache();
-            echo '<p id="cache_time" style="display:inline-block; font-size:11px; padding:0 6px; background-color:#0cf; border-radius:2px;">Önbellek yenilendi</p>';
+            echo '<p id="cache_time" style="position:fixed;right:5px;top:5px;background-color:#0cf; border-radius:2px;z-index:999;padding:3px 5px;">ReCached!</p>';
         }
     }
 
     public function setCache() {
         //header("Content-Type:text/html; charset=utf8");
-        $data = '<p id="cache_time" style="display:inline-block; font-size:11px; padding:0 6px; background-color:#fc0; border-radius:2px;">Önbellek';
-        $data .= ' : <strong color="white">'.($this->fileMT()-time()).'sn</strong></p> ';
+        $data = '<p id="cache_time" style="position:fixed;right:5px;top:5px;background-color:#fc0; border-radius:2px;z-index:999;padding:3px 5px;">';
+        $data .= '<strong color="white">'.($this->fileMT()-time()).'sn</strong></p> ';
         $data .= $this->getCacheFile();
         $data .= $this->cacheExpireCounter();
         route()->setResponse($data);

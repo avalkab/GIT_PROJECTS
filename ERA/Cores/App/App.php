@@ -32,6 +32,10 @@ class App extends \Singleton {
     }
     */
 
+    public function factory($obj, Array $parameters = null) {
+        return sizeof($parameters)==0 ? new $obj : new $obj($parameters);
+    }
+
     public function register($obj_name = null, $obj = null) {
         //$this->{$obj_name} = $obj;
         $this->object_collection[$obj_name] = $obj;

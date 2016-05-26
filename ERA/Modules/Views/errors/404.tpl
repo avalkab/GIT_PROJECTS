@@ -66,7 +66,7 @@ body{
 <h1>404</h1>
 <p>İstediğin sayfayı bulamadık, ama üzülme senin için hala birşeyler yapabiliriz!<br><br>Arama kutusunu kullanmaya ne dersin?</p>
 <br>
-<form id="search" action="http://localhost/dev/mvc/decorator.php?param=arama" method="post">
+<form id="search" action="<?php echo __WEBROOT; ?>arama" method="GET">
     <label for="search_q">Bulmak istediğini arama kutusuna yazarak başlayalım!</label>
     <br>
     <br>

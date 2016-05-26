@@ -4,6 +4,7 @@ class View {
     const PATTERN_VAR = '/\{([a-z_\.]+)\}/';
     const PATTERN_INC = '/\@inc:(.*)\@/';
     const PATTERN_MARK = '/\@mark:(.*)\@/';
+    const PATTERN_ASSETS = '/\@assets:(.*)\@/';
 
     /* private $templates_path; */
     private $views_path;
@@ -75,6 +76,15 @@ class View {
         }
     }
 
+    private function findAssets() {
+        preg_match_all(self::PATTERN_ASSETS, $this->last_content, $assets); //PREG_SET_ORDER
+        if (sizeof($assets[0])>0) {
+            foreach ($assets[1] as $key => $value) {
+                $this->last_content = str_replace($assets[0][$key], assets($value), $this->last_content);
+            }
+        }
+    }
+
     public function setRender($filename = null) {
         $pure_filename = str_replace($this->views_path, '', $filename);
         $this->rendered_collection[] = $pure_filename;
@@ -88,13 +98,14 @@ class View {
     public function render($filename = null) {
         if (file_exists($filename)) {
             ob_start('ob_gzhandler');
-            //header("Content-Type:text/html; charset=utf8");
+            header("Content-Type:text/html; charset=utf8");
             if ($this->vars['values']) {
                 extract($this->vars['values']);
             }
             require_once($filename);
             $this->last_content = ob_get_clean();
             $this->findMark();
+            $this->findAssets();
             $this->setRender($filename);
             $this->findInc();
         }
@@ -115,6 +126,14 @@ class View {
         }
     }
     */
+
+    public function template($filename) {
+        ob_start();
+        require_once $this->views_path.'templates/'.$filename.'.tpl';
+        $content = ob_get_contents();
+        ob_end_clean();
+        return $content;
+    }
 
     public function make($filename = null) {
         $this->render($this->views_path.$filename.'.tpl');

@@ -55,8 +55,13 @@ $app->route->get('404', function() {
 });
 
 /* ARAMA */
-$app->route->post('arama', function() {
+$app->route->get('arama', function() {
+    html()->guard->protect('GET', 'headerSearchToken');
+    $status = html()->guard->getTokenStatus();
+
     echo '<pre>';
-    print_r($_POST);
+    print_r( $_GET );
+    print_r( $_SESSION );
+    print_r( route() );
     echo '</pre>';
 });

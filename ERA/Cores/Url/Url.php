@@ -5,7 +5,7 @@
         public static $base;
 
         public static function getUrls() {
-            static::$urls = require_once(__ROOT.'Configs/Urls.php');
+            static::$urls = require(__ERA.'Configs/Urls.php');
         }
 
         public static function make($key = null, Array $values = null) {

@@ -46,3 +46,7 @@ function translate($key) {
     }
     return Translate::getInstance(['language' => 'tr'])->getVar($key);
 }
+
+function assets($file = null) {
+    return __WEBROOTPUB.'assets/'.$file;
+}

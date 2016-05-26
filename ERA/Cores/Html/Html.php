@@ -23,7 +23,7 @@ class Html extends \Singleton {
 
         $this->setHtmlElement($element);
 
-        if ($tagname == 'form' && (!isset($parameters['csrf']) || $parameters['csrf'] == true)) {
+        if ($tagname == 'form' && $parameters['csrf'] == true) {
             $token_name = '__INPT'.md5($element_base);
             $token_key = $this->guard->protect($parameters['method'], $token_name);
             $this->createElement('input', ['type' => 'hidden', 'name' => $token_name, 'value' => $token_key], null, false);

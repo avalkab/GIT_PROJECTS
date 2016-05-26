@@ -41,6 +41,10 @@ $paths = [
     'BaseController'        => 'ERA/Bases/',
     'BaseModel'             => 'ERA/Bases/',
     'HomeController'        => 'ERA/Modules/Controllers/',
+    'BannerController'      => 'ERA/Modules/Controllers/',
+    'CommentsController'    => 'ERA/Modules/Controllers/',
+    'PostController'        => 'ERA/Modules/Controllers/',
+    'MetaController'        => 'ERA/Modules/Controllers',
 
     /* Models */
     'HomeModel'             => 'ERA/Modules/Models/',
@@ -91,6 +95,10 @@ $alias = [
     'BaseController'        => '\ERA\Bases\BaseController',
     'BaseModel'             => '\ERA\Bases\BaseModel',
     'HomeController'        => '\ERA\Controllers\HomeController',
+    'BannerController'      => '\ERA\Controllers\BannerController',
+    'CommentsController'    => '\ERA\Controllers\CommentsController',
+    'PostController'        => '\ERA\Controllers\PostController',
+    'MetaController'        => '\ERA\Controllers\MetaController',
 
     /* Models */
     'HomeModel'             => '\ERA\Models\HomeModel',
