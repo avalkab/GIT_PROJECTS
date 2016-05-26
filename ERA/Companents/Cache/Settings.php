@@ -1,4 +1,5 @@
 <?php return [
+    'running' => false,
     'events' => [
         'out_compile_start' => 'startCache',
         'compile_response' => 'setCache',

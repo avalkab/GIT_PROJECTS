@@ -33,6 +33,9 @@ abstract class ACompanentAdapter implements \ICompanentBuilder {
 
         if (file_exists($file)) {
             $this->settings = require_once($file);
+            if ($this->settings['running'] == false) {
+                return;
+            }
         }
 
         if (isset($this->settings['events'])) {
