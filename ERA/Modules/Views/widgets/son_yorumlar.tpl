@@ -1,18 +1,15 @@
-<?php $comments = commentsWidget(5); ?>
+<?php $comments = commentsWidget(); ?>
 <!-- .side-comments-->
 <div class="side-comments container">
 <h3>SON YORUMLAR</h3>
 <ul class="side-comments-list">
-    <?php foreach($comments as $key => $comment) {
-    $title = postTitle($comment->post_id, $comment->tablo_adi, true);
-    $url = Url::make($comment->tablo_adi.'-detay', [$title]);
-    ?>
-    <li id="comment_<?php echo $comment->username.'_'.$comment->comment_id; ?>">
+    <?php foreach($comments as $key => $comment) { ?>
+    <li id="yorum_<?php echo $comment->kullanici_adi.'_'.$comment->id; ?>">
         <i class="icon comment"></i>
-        <a class="title" href="<?php echo $url; ?>" title="<?php echo $comment->username; ?>"><?php echo $comment->username; ?></a>
+        <a class="title" href="<?php echo __WEBROOT.$comment->sef; ?>" title="<?php echo $comment->kullanici_adi.' '.$comment->yorum.' diyor.'; ?>"><?php echo $comment->kullanici_adi; ?></a>
         <p><?php echo $comment->yorum; ?></p>
     </li>
-    <?php unset($title); unset($url); } ?>
+    <?php } ?>
 </ul>
 </div>
 <!-- /.side-commentsss-->

@@ -1,6 +1,6 @@
 <?php return [
     'host'      => 'localhost',
-    'dbname'    => 'kbs_db',
+    'dbname'    => 'bonus_kazan',
     'username'  => 'root',
     'password'  => ''
 ];

@@ -8,6 +8,7 @@ class BannerController extends \BaseController{
     }
 
     public function getBanners(Array $parameters = null) {
+        return;
         return db()->get_results("
             SELECT ".$parameters['cols']."
             FROM view_banner

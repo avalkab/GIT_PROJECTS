@@ -2,7 +2,7 @@
 
 class MetaController extends \BaseController{
 
-    public static function pull($id, $table) {
+    public static function pull() {
         return db()->get_row("SELECT title,keywords,description FROM meta WHERE kayit_id = $id AND tablo = '$table'");
     }
 

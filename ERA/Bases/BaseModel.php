@@ -11,12 +11,19 @@ class BaseModel {
     const PATTERN_MAIL      = '/^([a-zA-Z0-9-_.]+)@([a-zA-Z-.]+)$/';
     const PATTERN_USERNAME  = '/^[a-zA-Z0-9-_.]+$/';
 
+    const QUERY_INSERT = 'INSERT INTO %s SET %s';
+    const QUERY_UPDATE = 'UPDATE %s SET %s WHERE %s';
+    const QUERY_SELECT = 'SELECT %s FROM %s';
+    const QUERY_DELETE = 'DELETE FROM %s WHERE %s = %s';
+
     protected $request_method = 'POST';
     protected $table;
     protected $fillable;
 
     protected $request_data;
     protected $validate = 0;
+
+    protected $query_string;
 
     //'token' => ['type' => 'alns',  'min' => 32, 'max' => 32]
 
@@ -49,6 +56,7 @@ class BaseModel {
                 $this->request_data[$value] = !empty($input[$value]) ? ($this->fillable[$value]['hash']) ? md5($input[$value]) : $input[$value] : '';
             }
         }
+        $this->prepareProp($input);
     }
 
     protected function validMethod() {
@@ -56,8 +64,14 @@ class BaseModel {
     }
 
     protected function validBetween($name, $min = 8, $max = 18) {
-        $data_length = strlen($this->request_data[$name]);
-        return ($data_length >= intval($min) && $data_length <= intval($max)) ? 1 : 0;
+        $min = intval($min);
+        $max = intval($max);
+        if ($min == 0 && $max == 0) {
+            return 1;
+        }else{
+            $data_length = strlen($this->request_data[$name]);
+            return ($data_length >= $min && $data_length <= $max) ? 1 : 0;
+        }
     }
 
     protected function validType($name, $type) {
@@ -97,5 +111,20 @@ class BaseModel {
 
     public function isValidate() {
         return ($this->validate == 1) ? true : false;
+    }
+
+    protected function prepareProp(Array $parameters = null) {
+        if (sizeof($parameters)>0) {
+            foreach ($parameters as $key => $value) {
+                if (property_exists($this, $key)) {
+                    $this->{$key} = $value;
+                }
+            }
+        }
+    }
+
+    protected function createQuery($query_string, Array $parameters = null) {
+        $static = constant('self::QUERY_'.$query_string);
+        return $this->query_string = vsprintf($static, $parameters);
     }
 }

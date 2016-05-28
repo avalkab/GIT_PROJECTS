@@ -1,18 +1,22 @@
 <?php namespace ERA\Controllers;
 
 class CommentsController extends \BaseController{
-    private $model;
+    protected $model;
 
     function __construct() {
+        $this->model = new \CommentsModel();
     }
 
-    public function getComments(Array $parameters = null) {
-        return db()->get_results("
-            SELECT ".$parameters['cols']."
-            FROM view_yorumlar
-            ".$parameters['where']."
-            ORDER by id DESC
-            LIMIT ".$parameters['limit']."
-        ");
+    public static function getInstance() {
+        return new self;
     }
+
+    public function first($end = 5, $start = 0, $where = null, $select = null) {
+        return $this->model->pull('LIMIT '.$start.','.$end, 'ORDER by id ASC', $where, $select);
+    }
+
+    public function last($end = 5, $start = 0, $where = null, $select = null) {
+        return $this->model->pull('LIMIT '.$start.','.$end, 'ORDER by id DESC', $where, $select);
+    }
+
 }

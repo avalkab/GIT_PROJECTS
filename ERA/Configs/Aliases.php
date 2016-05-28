@@ -48,6 +48,7 @@ $paths = [
 
     /* Models */
     'HomeModel'             => 'ERA/Modules/Models/',
+    'CommentsModel'         => 'ERA/Modules/Models/',
 
     /* Patterns */
     'Singleton'             => 'ERA/Helpers/Patterns/Singleton/'
@@ -102,6 +103,7 @@ $alias = [
 
     /* Models */
     'HomeModel'             => '\ERA\Models\HomeModel',
+    'CommentsModel'         => '\ERA\Models\CommentsModel',
 
     /* Patterns */
     'Singleton'             => '\ERA\Patterns\Singleton'

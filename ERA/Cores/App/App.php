@@ -33,7 +33,11 @@ class App extends \Singleton {
     */
 
     public function factory($obj, Array $parameters = null) {
-        return sizeof($parameters)==0 ? new $obj : new $obj($parameters);
+        if (!is_object($this->object_collection[$obj])) {
+            $created_obj = sizeof($parameters)==0 ? new $obj : new $obj($parameters);
+            $this->register($obj, $created_obj);
+        }
+        return $this->object_collection[$obj];
     }
 
     public function register($obj_name = null, $obj = null) {

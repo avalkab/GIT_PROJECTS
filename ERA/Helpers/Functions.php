@@ -110,12 +110,8 @@ function banners() {
     return view()->setVars(['banners' => $banners])->template('banner');
 }
 
-function commentsWidget($limit = 5) {
-    return app()->factory('CommentsController')->getComments([
-        'cols' => 'username,post_id,comment_id,yorum,tablo_adi',
-        'where' => 'WHERE aktif = 1',
-        'limit' => $limit
-    ]);
+function commentsWidget() {
+    return app()->factory('CommentsController')->last(5);
 }
 
 function postTitle($id, $table, $is_slug = false) {

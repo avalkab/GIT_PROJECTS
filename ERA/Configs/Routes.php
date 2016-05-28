@@ -44,9 +44,9 @@ $app->route->get('welcome{opt}', function($name) {
     return view()->setVar('ad', $name)->make('welcome');
 });
 
-/* HABER DETAY */
-$app->route->get('haber-detay/{int}/{any}', function($id, $sef) {
-    return view()->setVars(['id' => $id, 'sef' => $sef])->page('news-detail');
+/* Sayfa */
+$app->route->get('sayfa/{str}', function($sef) {
+    return view()->setVars(['sef' => $sef])->page('news-detail');
 });
 
 /* 404 */
