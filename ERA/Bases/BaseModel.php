@@ -11,11 +11,6 @@ class BaseModel {
     const PATTERN_MAIL      = '/^([a-zA-Z0-9-_.]+)@([a-zA-Z-.]+)$/';
     const PATTERN_USERNAME  = '/^[a-zA-Z0-9-_.]+$/';
 
-    const QUERY_INSERT = 'INSERT INTO %s SET %s';
-    const QUERY_UPDATE = 'UPDATE %s SET %s WHERE %s';
-    const QUERY_SELECT = 'SELECT %s FROM %s';
-    const QUERY_DELETE = 'DELETE FROM %s WHERE %s = %s';
-
     protected $request_method = 'POST';
     protected $table;
     protected $fillable;
@@ -23,7 +18,7 @@ class BaseModel {
     protected $request_data;
     protected $validate = 0;
 
-    protected $query_string;
+    protected $sql_query_string;
 
     //'token' => ['type' => 'alns',  'min' => 32, 'max' => 32]
 
@@ -121,10 +116,5 @@ class BaseModel {
                 }
             }
         }
-    }
-
-    protected function createQuery($query_string, Array $parameters = null) {
-        $static = constant('self::QUERY_'.$query_string);
-        return $this->query_string = vsprintf($static, $parameters);
     }
 }

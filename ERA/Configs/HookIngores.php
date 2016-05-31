@@ -1,5 +1,8 @@
 <?php return [
-    'ajax/*'
+    'ajax/*',
+    'admin/*',
+    'rss/*',
+    'api/*'
     /*
     'ajax/passwordValidator',
     'ajax/login',

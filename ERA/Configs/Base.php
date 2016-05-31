@@ -1,7 +1,7 @@
 <?php
 
 $page_id = 0;
-$page_table = 0;
+$page_sef = 0;
 
 function id($id = null) {
     if (!is_null($id)) {
@@ -10,9 +10,9 @@ function id($id = null) {
     return $GLOBALS['page_id'];
 }
 
-function table($table = null) {
-    if (!is_null($table)) {
-        $GLOBALS['page_table'] = $table;
+function sef($sef = null) {
+    if (!is_null($sef)) {
+        $GLOBALS['page_sef'] = $sef;
     }
-    return $GLOBALS['page_table'];
+    return $GLOBALS['page_sef'];
 }

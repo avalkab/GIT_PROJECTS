@@ -50,3 +50,12 @@ function translate($key) {
 function assets($file = null) {
     return __WEBROOTPUB.'assets/'.$file;
 }
+
+function sql() {
+    return app()->factory('SqlBuilder');
+}
+
+
+function post(Array $parameters = null) {
+    return app()->factory('PostController', $parameters);
+}

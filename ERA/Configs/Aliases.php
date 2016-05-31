@@ -16,6 +16,7 @@ $paths = [
     'Html'                  => 'ERA/Cores/Html/',
     'FormGuard'             => 'ERA/Cores/Html/',
     'DB'                    => 'ERA/Cores/DB/',
+    'SqlBuilder'            => 'ERA/Cores/SqlBuilder/',
     'Image'                 => 'ERA/Cores/Image/',
     'Password'              => 'ERA/Cores/Secure/',
     'BiometricPassword'     => 'ERA/Cores/Secure/',
@@ -49,6 +50,7 @@ $paths = [
     /* Models */
     'HomeModel'             => 'ERA/Modules/Models/',
     'CommentsModel'         => 'ERA/Modules/Models/',
+    'PostModel'             => 'ERA/Modules/Models/',
 
     /* Patterns */
     'Singleton'             => 'ERA/Helpers/Patterns/Singleton/'
@@ -71,6 +73,7 @@ $alias = [
     'Html'                  => '\ERA\Core\Html',
     'FormGuard'             => '\ERA\Core\Html\FormGuard',
     'DB'                    => '\ERA\Core\DB',
+    'SqlBuilder'            => '\ERA\Core\SqlBuilder',
     'Image'                 => '\ERA\Core\Image',
     'Password'              => '\ERA\Core\Secure\Password',
     'BiometricPassword'     => '\ERA\Core\Secure\BiometricPassword',
@@ -104,6 +107,7 @@ $alias = [
     /* Models */
     'HomeModel'             => '\ERA\Models\HomeModel',
     'CommentsModel'         => '\ERA\Models\CommentsModel',
+    'PostModel'             => '\ERA\Models\PostModel',
 
     /* Patterns */
     'Singleton'             => '\ERA\Patterns\Singleton'

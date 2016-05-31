@@ -1,29 +1,31 @@
 <?php namespace ERA\Controllers;
 
 class PostController extends \BaseController {
-    function __construct() {
+    private $model;
+
+    protected $parameters = [];
+
+    function __construct(Array $parameters = null) {
+        $this->parameters = $parameters;
+        $this->model = new \PostModel();
     }
 
-    private function getStruct(Array $parameters = null) {
-        return "SELECT ".$parameters['columns']."
-            FROM ".$parameters['table']."
-            ".$parameters['where']."
-            LIMIT 1";
+    public function all($e = 10, $s = 0, $where = 1, $select = '*') {
+        if (!is_array($where)) {
+            $where = [1];
+        }
+        return $this->model->pullAll($e, $s, $where, $select);
     }
 
-    private function getSingleRow(Array $parameters = null) {
-        return db()->get_row($this->getStruct($parameters));
+    public function one($where = 1, $select = '*') {
+        if (!is_array($where)) {
+            $where = [1];
+        }
+        return $this->model->pullOne($where, $select);
     }
 
-    private function getSingleRowVar(Array $parameters = null) {
-        return db()->get_var($this->getStruct($parameters));
+    public function id($sef) {
+        return $this->model->sefToId($sef);
     }
 
-    public function getPostTitle($post_id, $table) {
-        return $this->getSingleRowVar([
-                'columns' => 'baslik',
-                'table' => $table,
-                'where' => 'WHERE id = '.$post_id
-            ]);
-    }
 }

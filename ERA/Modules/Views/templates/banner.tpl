@@ -1,4 +1,10 @@
-<?php $banners = $this->getVar('banners'); $banner_count = sizeof($banners); ?>
+<?php
+//echo id();
+$post = post()->one();
+
+
+$banners = $this->getVar('banners'); $banner_count = sizeof($banners);
+?>
 <!-- .banner -->
 <div class="banner container">
 <div id="bonus_kazan_banner" class="carousel slide" data-ride="carousel">
@@ -14,7 +20,7 @@
 <div class="carousel-inner" role="listbox">
     <?php foreach($banners as $key => $value) { ?>
     <div class="item <?php if($key == 0) { echo 'active'; } ?>">
-    <img class="img-responsive" src="<?php echo __WEBROOTPUB.$value->gorsel_url; ?>" title="<?php echo $value->baslik; ?>">
+    <img class="img-responsive" src="<?php echo __UPLOADS.$value->img; ?>" title="<?php echo $value->baslik; ?>">
     <div class="carousel-caption">
         <h3><?php echo $value->baslik; ?></h3>
         <p><?php echo $value->spot; ?></p>

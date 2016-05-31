@@ -25,13 +25,17 @@ class View {
     }
 
     public function setVars(Array $vars = null) {
-        $this->vars['values'] = array_merge($this->vars, $vars);
+        $this->vars['values'] = array_merge((array)$this->vars['values'], $vars);
         return $this;
     }
 
     public function setVar($name, $value) {
         $this->vars['values'][$name] = $value;
         return $this;
+    }
+
+    public function getVars() {
+        return $this->vars['values'];
     }
 
     public function getVar($name) {
@@ -99,8 +103,8 @@ class View {
         if (file_exists($filename)) {
             ob_start('ob_gzhandler');
             header("Content-Type:text/html; charset=utf8");
-            if ($this->vars['values']) {
-                extract($this->vars['values']);
+            if ($vars = $this->getVars()) {
+                extract($vars);
             }
             require_once($filename);
             $this->last_content = ob_get_clean();
@@ -109,6 +113,15 @@ class View {
             $this->setRender($filename);
             $this->findInc();
         }
+    }
+
+    public function sefid() {
+        if ($sef = $this->getVar('sef')) {
+            $id = post()->id($sef);
+            id($id);
+            sef($sef);
+        }
+        return $this;
     }
 
     /*

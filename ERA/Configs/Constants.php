@@ -28,4 +28,6 @@
 
     define('__WEBROOTPUB',      __WEBROOT.'public/' );
 
+    define('__UPLOADS',         __WEBROOT.'public/uploads/' );
+
     define('__PAGE',            str_replace(__WORK, '' , parse_url(__REQ)['path']));

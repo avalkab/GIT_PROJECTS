@@ -1,6 +1,6 @@
 <?php
 
-/* AJAX */
+/* Ajax */
 $app->route->post('ajax/{str}', function($type) {
     switch ($type) {
         case 'passwordValidator':
@@ -24,29 +24,25 @@ $app->route->post('ajax/{str}', function($type) {
     }
 });
 
-/* ANASAYFA */
+/* Anasayfa */
 //$app->route->get('/', 'HomeController:index');
 $app->route->any('/', function() {
-    return view()->setVar('page_title', 'Anasayfa')->main('home', 'main');
-});
-
-
-/* MAİL */
-$app->route->get('mail', function() {
-    return view()->setVars([
-               'mail_title' => 'Sitemize Hoşgeldiniz!',
-               'mail_content' => 'Lorem Ipsum, dizgi ve baskı endüstrisinde kullanılan mıgır metinlerdir. '
-           ])->mail('mail');
-});
-
-/* HAKKIMIZDA */
-$app->route->get('welcome{opt}', function($name) {
-    return view()->setVar('ad', $name)->make('welcome');
+    return view()->main('anasayfa', 'main');
 });
 
 /* Sayfa */
 $app->route->get('sayfa/{str}', function($sef) {
-    return view()->setVars(['sef' => $sef])->page('news-detail');
+    return view()->setVar('sef', $sef)->sefid()->main('detay', 'main');
+});
+
+/* Mail */
+$app->route->get('mail', function() {
+    return view()->mail('mail');
+});
+
+/* Hakkımızda */
+$app->route->get('welcome{opt}', function($name) {
+    return view()->setVar('ad', $name)->make('welcome');
 });
 
 /* 404 */
@@ -54,7 +50,7 @@ $app->route->get('404', function() {
     return view()->error('404');
 });
 
-/* ARAMA */
+/* Arama */
 $app->route->get('arama', function() {
     html()->guard->protect('GET', 'headerSearchToken');
     $status = html()->guard->getTokenStatus();

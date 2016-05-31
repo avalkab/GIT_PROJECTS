@@ -103,23 +103,18 @@ function image($url, $watermark = false) {
 }
 
 function banners() {
-    $banners = app()->factory('BannerController')->getBanners([
-        'cols' => 'baslik,spot,url,gorsel_url',
-        'limit' => 5,
-    ]);
+    $banners = sql()
+    ->select(['icerikler.baslik', 'icerik_meta.veri as img'])
+    ->from(['icerikler'])
+    ->join('inner', 'icerik_meta', ['icerikler.id','=', 'icerik_meta.icerik_id', true])
+    ->where(['icerik_meta.anahtar','=','_era_slider_image'])
+    ->limit(0,10)
+    ->all();
     return view()->setVars(['banners' => $banners])->template('banner');
 }
 
 function commentsWidget() {
     return app()->factory('CommentsController')->last(5);
-}
-
-function postTitle($id, $table, $is_slug = false) {
-    $title = app()->factory('PostController')->getPostTitle($id, $table);
-    if ($is_slug === true) {
-        $title = Slug::make($title);
-    }
-    return $title;
 }
 
 hook()->setEvent('page_top', 'banners');
