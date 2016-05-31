@@ -1,7 +1,4 @@
 <?php
-//echo id();
-$post = post()->one();
-
 
 $banners = $this->getVar('banners'); $banner_count = sizeof($banners);
 ?>
@@ -23,7 +20,7 @@ $banners = $this->getVar('banners'); $banner_count = sizeof($banners);
     <img class="img-responsive" src="<?php echo __UPLOADS.$value->img; ?>" title="<?php echo $value->baslik; ?>">
     <div class="carousel-caption">
         <h3><?php echo $value->baslik; ?></h3>
-        <p><?php echo $value->spot; ?></p>
+        <p><?php echo $value->veri; ?></p>
         <?php if($value->url) { ?>
         <a href="<?php echo $value->url; ?>">Detay</a>
         <?php } ?>

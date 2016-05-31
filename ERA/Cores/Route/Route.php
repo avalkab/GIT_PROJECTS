@@ -126,16 +126,15 @@ class Route
     public function run() {
         hook()->mark('run_begin');
 
-        if ($this->route_handle) {
+        if ($this->route_handle && post()->autoIsHave()) {
             echo $this->getResponse();
         }else{
-            echo view()->error('404');
+            echo __404();
             //header('HTTP/1.0 404 Not Found', true, 404);
             //header('Location:http://localhost/dev/mvc/decorator.php?param=404');
         }
 
         hook()->mark('run_end');
-
         exit;
     }
 }

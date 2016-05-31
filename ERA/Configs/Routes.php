@@ -27,12 +27,17 @@ $app->route->post('ajax/{str}', function($type) {
 /* Anasayfa */
 //$app->route->get('/', 'HomeController:index');
 $app->route->any('/', function() {
-    return view()->main('anasayfa', 'main');
+    return view()->main('anasayfa');
 });
 
 /* Sayfa */
 $app->route->get('sayfa/{str}', function($sef) {
-    return view()->setVar('sef', $sef)->sefid()->main('detay', 'main');
+    return view()->setVars(['sef'=>$sef,'page_type'=>'sayfa'])->sit()->main('sayfa-detay');
+});
+
+/* Yazı */
+$app->route->get('yazi/{str}', function($sef) {
+    return view()->setVars(['sef'=>$sef,'page_type'=>'yazi'])->sit()->main('yazi-detay');
 });
 
 /* Mail */
@@ -47,7 +52,7 @@ $app->route->get('welcome{opt}', function($name) {
 
 /* 404 */
 $app->route->get('404', function() {
-    return view()->error('404');
+    return __404();
 });
 
 /* Arama */

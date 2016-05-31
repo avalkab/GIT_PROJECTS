@@ -2,6 +2,7 @@
 
 $page_id = 0;
 $page_sef = 0;
+$page_type = 0;
 
 function id($id = null) {
     if (!is_null($id)) {
@@ -15,4 +16,11 @@ function sef($sef = null) {
         $GLOBALS['page_sef'] = $sef;
     }
     return $GLOBALS['page_sef'];
+}
+
+function type($type = null) {
+    if (!is_null($type)) {
+        $GLOBALS['page_type'] = $type;
+    }
+    return $GLOBALS['page_type'];
 }

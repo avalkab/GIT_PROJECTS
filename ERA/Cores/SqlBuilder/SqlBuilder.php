@@ -50,7 +50,7 @@ class SqlBuilder {
     }
 
     /* FROM */
-    public function from(Array $columns = null) {
+    public function from($columns = null) {
         if (!is_array($columns)) {
             $columns = [$columns];
         }
@@ -264,9 +264,8 @@ class SqlBuilder {
                 $sql[$key] = $this->prepare($key);
             }
         }
-        $sql = implode(' ', $sql);
         unset($this->sql);
-        return $sql;
+        return implode(' ', $sql);
     }
 
     /* PULL */
@@ -283,7 +282,8 @@ class SqlBuilder {
     }
 
     public function query() {
-        return db()->query($this->create());
+        $sql = $this->create();
+        return db()->query($sql);
     }
 }
 

@@ -115,11 +115,12 @@ class View {
         }
     }
 
-    public function sefid() {
+    public function sit() {
         if ($sef = $this->getVar('sef')) {
             $id = post()->id($sef);
             id($id);
             sef($sef);
+            type($this->getVar('page_type'));
         }
         return $this;
     }
@@ -174,7 +175,7 @@ class View {
         return $this->make('masters/'.$page);
     }
 
-    public function main($page, $master) {
+    public function main($page = 'home', $master = 'main') {
         $this->setVar('page', $page);
         return $this->make('masters/'.$master);
     }

@@ -18,7 +18,8 @@ class PostModel extends \BaseModel {
               $durum;
 
     protected $request_method = 'POST';
-    protected $table = 'icerikler';
+
+    public $table = 'icerikler';
 
     protected $fillable = [
         'id'                => ['type' => 'int'],

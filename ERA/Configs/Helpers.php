@@ -40,6 +40,10 @@ function mailer() {
     return new Mail;
 }
 
+function __404() {
+    return view()->error('404');
+}
+
 function translate($key) {
     if (!is_string($key)) {
         return false;
