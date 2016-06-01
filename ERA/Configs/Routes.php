@@ -52,7 +52,7 @@ $app->route->get('welcome{opt}', function($name) {
 
 /* 404 */
 $app->route->get('404', function() {
-    return __404();
+    __404();
 });
 
 /* Arama */

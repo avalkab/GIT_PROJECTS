@@ -41,7 +41,7 @@ function mailer() {
 }
 
 function __404() {
-    return view()->error('404');
+    exit(view()->error('404'));
 }
 
 function translate($key) {

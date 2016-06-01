@@ -181,6 +181,8 @@ class View {
     }
 
     public function printContent() {
-        return $this->content;
+        $content = $this->content;
+        unset($this->content);
+        return $content;
     }
 }

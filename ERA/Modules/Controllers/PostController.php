@@ -5,25 +5,23 @@ class PostController extends \BaseController {
 
     protected $parameters = [];
 
-    protected $allowed_have_pages = [
-        '/sayfa\\/([a-zA-Z_-]+)/',
-        '/yazi\\/([a-zA-Z_-]+)/'
-    ];
+    protected $allowed_have_pages = ['yazi', 'sayfa'];
 
     function __construct(Array $parameters = null) {
         $this->parameters = $parameters;
         $this->model = new \PostModel();
     }
 
-    public function autoIsHave() {
-        $handle = true;
-        foreach ($this->allowed_have_pages as $value) {
-            if (preg_match($value, __PAGE)) {
-                $handle = $this->have();
-                break;
+    public function checkPostPage() {
+        if ($this->isPostPage() === true) {
+            if ($this->have() === false) {
+                __404();
             }
         }
-        return $handle;
+    }
+
+    public function isPostPage() {
+        return in_array(type(), $this->allowed_have_pages, true) ? true : false;
     }
 
     public function have() {
