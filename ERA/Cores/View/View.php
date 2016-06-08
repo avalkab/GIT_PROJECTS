@@ -117,8 +117,7 @@ class View {
 
     public function sit() {
         if ($sef = $this->getVar('sef')) {
-            $id = post()->id($sef);
-            id($id);
+            id(post()->id($sef));
             sef($sef);
             type($this->getVar('page_type'));
         }

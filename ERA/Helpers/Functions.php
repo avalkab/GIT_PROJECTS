@@ -113,10 +113,6 @@ function banners() {
     return view()->setVars(['banners' => $banners])->template('banner');
 }
 
-function commentsWidget() {
-    return app()->factory('CommentsController')->last(5);
-}
-
 hook()->setEvent('page_top', 'banners');
 
 //hook()->setEvent('run_end', 'app_debug');

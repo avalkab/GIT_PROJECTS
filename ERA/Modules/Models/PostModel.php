@@ -19,7 +19,7 @@ class PostModel extends \BaseModel {
 
     protected $request_method = 'POST';
 
-    public $table = 'icerikler';
+    protected $table = 'icerikler';
 
     protected $fillable = [
         'id'                => ['type' => 'int'],
@@ -44,6 +44,17 @@ class PostModel extends \BaseModel {
         $this->validRequestData();
     }
 
+    public function isHave() {
+        return sql()
+        ->select('id')
+        ->from($this->table)
+        ->whereGroupAnd([
+            ['tur','=',type()],
+            ['sef_url','=',sef()]
+        ])
+        ->query() ? true : false;
+    }
+
     public function pullAll($e = 10, $s = 0, $w = 1, $se = '*', $join = null) {
         return sql()
         ->select($se)
@@ -54,18 +65,23 @@ class PostModel extends \BaseModel {
         ->all();
     }
 
-    public function pullOne($where = 1, $select = '*') {
+    public function pullRow($select = '*') {
         return sql()
         ->select($select)
         ->from([$this->table])
-        ->where($where)
+        //->join('inner', 'icerik_meta', [$this->table.'.id','=','icerik_meta.icerik_id', true])
+        ->whereGroupAnd([
+            ['tur','=',type()],
+            ['sef_url','=',sef()],
+            ['durum','=','1'],
+        ])
         ->limit(0,1)
         ->row();
     }
 
     public function sefToId($sef) {
         return sql()
-        ->select(['id'])
+        ->select('id')
         ->from([$this->table])
         ->where(['sef_url','=',$sef])
         ->limit(0,1)

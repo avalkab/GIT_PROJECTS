@@ -45,7 +45,7 @@ $paths = [
     'BannerController'      => 'ERA/Modules/Controllers/',
     'CommentsController'    => 'ERA/Modules/Controllers/',
     'PostController'        => 'ERA/Modules/Controllers/',
-    'MetaController'        => 'ERA/Modules/Controllers',
+    'MetaController'        => 'ERA/Modules/Controllers/',
 
     /* Models */
     'HomeModel'             => 'ERA/Modules/Models/',

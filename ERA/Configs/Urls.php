@@ -4,6 +4,6 @@
             'arama'     => 'arama',
             'sayfa'     => 'sayfa/%s',
             'yazi'      => 'yazi/%s',
-            'kategori'  => 'kategori/%s'
+            'kategori'  => 'kategori/%s',
             'arsiv'     => 'arsiv/%s'
         ];

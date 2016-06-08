@@ -13,7 +13,7 @@ class CommentsModel extends \BaseModel {
               $ip;
 
     protected $request_method = 'GET';
-    protected $table = 'yorumlar';
+    public $table = 'yorumlar';
 
     protected $fillable = [
         'yorum'         => ['type' => 'str', 'min' => 5, 'max' => 500],
@@ -25,15 +25,6 @@ class CommentsModel extends \BaseModel {
     function __construct() {
         parent::__construct();
         $this->validRequestData();
-    }
-
-    public function pull($limit = null, $order = null, $where = null, $select = null) {
-        return;
-        $this->createQuery('SELECT', [
-            $select.' (SELECT concat(tur,"/",sef_url) as sef FROM icerikler WHERE id = icerik_id) as sef,id,yorum_id,kullanici_id,durum,yorum,kullanici_adi,ekleme_tarihi',
-            $this->table." $where $order $limit"
-        ]);
-        return db()->get_results($this->query_string);
     }
 
     protected function insert() {

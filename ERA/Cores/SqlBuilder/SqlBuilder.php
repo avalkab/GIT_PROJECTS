@@ -10,12 +10,19 @@ class SqlBuilder {
         'SET'       => [],
         'FROM'      => [],
         'JOIN'      => [],
-        'ORDER'     => [],
         'WHERE'     => [],
         'HAVING'    => [],
         'GROUP'     => [],
+        'ORDER'     => [],
         'LIMIT'     => []
     ];
+
+    private $output_type = 'OBJECT';
+
+    public function outputType($type) {
+        $this->output_type = $type;
+        return $this;
+    }
 
     /* INSERT */
     public function insert($table = null) {
@@ -232,6 +239,9 @@ class SqlBuilder {
 
     public function prepareJoin() {
         foreach ($this->sql['JOIN'] as $key => $value) {
+            if (!$value['on'][3]) {
+                $value['on'][3] = true;
+            }
             $join[] = strtoupper($value['type']).' JOIN '.$value['table'].' ON '.$this->caseImplode($value['on']);
         }
         return implode(' ', $join);
@@ -264,17 +274,17 @@ class SqlBuilder {
                 $sql[$key] = $this->prepare($key);
             }
         }
-        unset($this->sql);
-        return implode(' ', $sql);
+        $sql = implode(' ', $sql);
+        return $sql;
     }
 
     /* PULL */
     public function all() {
-        return db()->get_results($this->create());
+        return db()->get_results($this->create(), $this->output_type);
     }
 
     public function row() {
-        return db()->get_row($this->create());
+        return db()->get_row($this->create(), $this->output_type);
     }
 
     public function one() {
@@ -282,8 +292,7 @@ class SqlBuilder {
     }
 
     public function query() {
-        $sql = $this->create();
-        return db()->query($sql);
+        return db()->query($this->create());
     }
 }
 

@@ -11,12 +11,27 @@ class CommentsController extends \BaseController{
         return new self;
     }
 
-    public function first($end = 5, $start = 0, $where = null, $select = null) {
-        return $this->model->pull('LIMIT '.$start.','.$end, 'ORDER by id ASC', $where, $select);
+    public function side() {
+        return sql()
+        ->select('c.kullanici_adi, c.yorum, i.sef_url, i.tur as icerik_tur')
+        ->from($this->model->table.' as c')
+        ->join('inner','icerikler as i',['i.id','=','c.icerik_id'])
+        ->where(['c.durum','=','1'])
+        ->order(['c.ekleme_tarihi'], 'DESC')
+        ->limit(0,10)
+        ->all();
     }
 
-    public function last($end = 5, $start = 0, $where = null, $select = null) {
-        return $this->model->pull('LIMIT '.$start.','.$end, 'ORDER by id DESC', $where, $select);
+    public function post() {
+        return sql()
+        ->select('c.id, c.kullanici_adi, c.yorum, c.ekleme_tarihi, c.yorum_id')
+        ->from($this->model->table.' as c')
+        ->where(['c.durum','=','1'])
+        ->andWhere(['c.icerik_id','=',id()])
+        ->order(['c.ekleme_tarihi'], 'ASC')
+        ->limit(0,100)
+        ->outputType('ARRAY_A')
+        ->all();
     }
 
 }

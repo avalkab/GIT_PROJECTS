@@ -144,37 +144,7 @@
             </div>
             <!-- /.top-bet-sites -->
 
-            <div class="container">
-            <span class="tab-btn tabItem active" data-target="#fullComments">YORUMLAR</span>
-            <span class="tab-btn tabItem" data-target="#leaveComment">YORUM YAP</span>
-            <div id="fullComments" class="side-comments content-table inContents container tabContent">
-            <ul class="side-comments-list">
-                <li>
-                    <i class="icon comment"></i>
-                    <a class="title" href="#">Aenanen solluction lorem quis <i class="time">12.12.2015</i></a>
-                    <p>Proin gravida nibh vel velit auctor aliquet.</p>
-                </li>
-                <li class="even">
-                    <i class="icon comment"></i>
-                    <a class="title" href="#">Aenanen solluction lorem quis <i class="time">12.12.2015</i></a>
-                    <p>Proin gravida nibh vel velit auctor aliquet..</p>
-                </li>
-                <li>
-                    <i class="icon comment"></i>
-                    <a class="title" href="#">Aenanen solluction lorem quis <i class="time">12.12.2015</i></a>
-                    <p>Proin gravida nibh vel velit auctor aliquet.</p>
-                </li>
-                <li class="even">
-                    <i class="icon comment"></i>
-                    <a class="title" href="#">Aenanen solluction lorem quis <i class="time">12.12.2015</i></a>
-                    <p>Proin gravida nibh vel velit auctor aliquet..</p>
-                </li>
-            </ul>
-            </div>
-            <div id="leaveComment" class="content-table inContents container tabContent">
-            a
-            </div>
-            </div>
+            @inc:widgets/yorumlar.tpl@
 
             <!-- .carousel -->
             <ul class="custom-sites container">
@@ -227,55 +197,7 @@
 
         <!-- .content.right -->
         <div class="content right container">
-            <!-- .top-bet-sites -->
-            <div class="top-bet-sites container">
-                <span class="tab-btn green tabItem active" data-target="#tbPopuler">EN POPÜLER</span>
-                <span class="tab-btn green tabItem" data-target="#tbYeni">EN YENİ</span>
-                <table id="tbPopuler" class="content-table container tabContent">
-                    <tr class="titles">
-                        <td>Logolar</td>
-                        <td class="even">Domainler</td>
-                        <td>Bonus</td>
-                    </tr>
-                    <tr>
-                        <td><img src="images/logo.png" width="75"></td>
-                        <td class="even">bixbet.com</td>
-                        <td>250TL</td>
-                    </tr>
-                </table>
-                <div id="tbYeni" class="tabContent">
-                    <p>yeni</p>
-                </div>
-            </div>
-            <!-- /.top-bet-sites -->
-
-            <!-- .side-comments-->
-            <div class="side-comments container">
-                <h3>SON YORUMLAR</h3>
-                <ul class="side-comments-list">
-                    <li>
-                        <i class="icon comment"></i>
-                        <a class="title" href="#">Aenanen solluction lorem quis</a>
-                        <p>Proin gravida nibh vel velit auctor aliquet.</p>
-                    </li>
-                    <li class="even">
-                        <i class="icon comment"></i>
-                        <a class="title" href="#">Aenanen solluction lorem quis</a>
-                        <p>Proin gravida nibh vel velit auctor aliquet..</p>
-                    </li>
-                    <li>
-                        <i class="icon comment"></i>
-                        <a class="title" href="#">Aenanen solluction lorem quis</a>
-                        <p>Proin gravida nibh vel velit auctor aliquet.</p>
-                    </li>
-                    <li class="even">
-                        <i class="icon comment"></i>
-                        <a class="title" href="#">Aenanen solluction lorem quis</a>
-                        <p>Proin gravida nibh vel velit auctor aliquet..</p>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.side-comments-->
+            @inc:widgets/html_sidebar_widgets.tpl@
         </div>
         <!-- /.content.right -->
     </div>
