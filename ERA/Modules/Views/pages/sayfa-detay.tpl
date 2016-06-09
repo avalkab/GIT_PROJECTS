@@ -1,4 +1,12 @@
-<!-- .main -->
+<?php
+
+    $post = post()->row();
+    $meta = post()->metaAll('ARRAY_A');
+
+    //print_r($meta);
+
+?>
+    <!-- .main -->
     <div class="grid">
     <div class="main container">
         <!-- .content.left -->

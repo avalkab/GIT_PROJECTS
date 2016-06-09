@@ -21,6 +21,11 @@ $app->route->post('ajax/{str}', function($type) {
             $user = new User;
             $user->logout();
         break;
+
+        case 'newComment':
+            echo comment()->newComment();
+            //print_r( request()->post() );
+        break;
     }
 });
 

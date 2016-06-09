@@ -1,7 +1,7 @@
 <?php namespace ERA\Controllers;
 
 class CommentsController extends \BaseController{
-    protected $model;
+    public $model;
 
     function __construct() {
         $this->model = new \CommentsModel();
@@ -32,6 +32,10 @@ class CommentsController extends \BaseController{
         ->limit(0,100)
         ->outputType('ARRAY_A')
         ->all();
+    }
+
+    public function newComment() {
+        return $this->model->insert();
     }
 
 }

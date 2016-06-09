@@ -10,9 +10,10 @@ class CommentsModel extends \BaseModel {
               $kullanici_mail,
               $ekleme_tarihi,
               $agent,
+              $referer,
               $ip;
 
-    protected $request_method = 'GET';
+    protected $request_method = 'POST';
     public $table = 'yorumlar';
 
     protected $fillable = [
@@ -24,24 +25,31 @@ class CommentsModel extends \BaseModel {
 
     function __construct() {
         parent::__construct();
+
         $this->validRequestData();
+
+        $this->ekleme_tarihi = __CURRENT__;
+        $this->durum = 2;
+        $this->kullanici_adi = !empty($this->kullanici_adi) ? $this->kullanici_adi : 'Misafir';
     }
 
-    protected function insert() {
-        $this->createQuery('INSERT', [
-            $this->table,
-            "icerik_id = '".$this->icerik_id."'
-             yorum_id = '".$this->yorum_id."',
-             kullanici_id = '".$this->kullanici_id."',
-             durum = '1',
-             yorum = '".$this->yorum."',
-             kullanici_adi = '".$this->kullanici_adi."',
-             kullanici_mail = '".$this->kullanici_mail."',
-             ekleme_tarihi = '".$this->ekleme_tarihi."',
-             agent = '".$this->agent."',
-             ip = '".$this->ip."'"
-        ]);
-        echo $this->query_string;
+    public function insert() {
+        return sql()
+        ->insert($this->table)
+        ->set([
+             ['icerik_id', $this->icerik_id],
+             ['yorum_id', $this->yorum_id],
+             ['kullanici_id', $this->kullanici_id],
+             ['durum', $this->durum],
+             ['yorum', $this->yorum],
+             ['kullanici_adi', $this->kullanici_adi],
+             ['kullanici_mail', $this->kullanici_mail],
+             ['ekleme_tarihi', $this->ekleme_tarihi],
+             ['referer', $this->referer],
+             ['agent', $this->agent],
+             ['ip', $this->ip]
+        ])
+        ->query() ? 1 : 0;
     }
 
 

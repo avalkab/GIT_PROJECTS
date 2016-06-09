@@ -24,10 +24,17 @@ class BaseModel {
 
     function __construct() {
        $this->setRequestData();
+       $this->setArgs();
     }
 
     function __get($key) {
         return $this->request_data[$key];
+    }
+
+    private function setArgs() {
+        $this->agent = __USERAGENT__;
+        $this->ip = __IP__;
+        $this->referer = __REFERER__;
     }
 
     public function setRequestMethod($method) {

@@ -52,7 +52,7 @@ class SqlBuilder {
     }
 
     public function set(Array $case = null) {
-        $this->sql['SET'][] = $this->caseImplode($case);
+        $this->sql['SET'] = $case;
         return $this;
     }
 
@@ -166,6 +166,16 @@ class SqlBuilder {
         return $case_model;
     }
 
+    public function caseImplodeTwice(Array $case = null) {
+        if (isset($case[2]) && $case[2] === true) {
+            unset($case[2]);
+            $case_model = implode(' ', $case);
+        }else{
+            $case_model = $case[0].' = \''.$case[1].'\'';
+        }
+        return $case_model;
+    }
+
     public function mergeWith($sql, Array $outerGlue = null) {
         if ($outerGlue['direction'] && $outerGlue['glue']) {
             switch ($outerGlue['direction']) {
@@ -226,7 +236,10 @@ class SqlBuilder {
     }
 
     public function prepareSet() {
-        return ' SET '.implode('', $this->sql['SET']);
+        foreach ($this->sql['SET'] as $key => $value) {
+            $sets[] = $this->caseImplodeTwice($value);
+        }
+        return ' SET '.implode(',', $sets);
     }
 
     public function prepareSelect() {

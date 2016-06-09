@@ -5,6 +5,8 @@
 
     //print_r($meta);
 
+    comment()->newComment();
+
 ?>
 <!-- .main -->
     <div class="grid">
