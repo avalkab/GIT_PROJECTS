@@ -29,7 +29,7 @@ class CommentsModel extends \BaseModel {
         $this->validRequestData();
 
         $this->ekleme_tarihi = __CURRENT__;
-        $this->durum = 2;
+        $this->durum = 1;
         $this->kullanici_adi = !empty($this->kullanici_adi) ? $this->kullanici_adi : 'Misafir';
     }
 

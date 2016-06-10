@@ -4,9 +4,6 @@
     $meta = post()->metaAll('ARRAY_A');
 
     //print_r($meta);
-
-    comment()->newComment();
-
 ?>
 <!-- .main -->
     <div class="grid">

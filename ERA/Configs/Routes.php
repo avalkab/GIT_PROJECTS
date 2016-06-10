@@ -24,7 +24,22 @@ $app->route->post('ajax/{str}', function($type) {
 
         case 'newComment':
             echo comment()->newComment();
-            //print_r( request()->post() );
+        break;
+
+        case 'subscribe':
+            $phone = request()->post('phone');
+            $number_regex = '/^0[0-9]{3}-[0-9]{3}-[0-9]{2}-[0-9]{2}$/';
+            if (preg_match($number_regex, $phone)) {
+                $phone = str_replace('-', '', $phone);
+                if (!sql()->select('id')->from('abonelikler')->where(['numara', '=', $phone])->query()) {
+                    sql()->insert('abonelikler')->set([['numara', $phone]])->query();
+                    echo 1;
+                }else{
+                    echo 3;
+                }
+            }else{
+                echo 2;
+            }
         break;
     }
 });

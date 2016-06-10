@@ -11,8 +11,8 @@
         <a class="footer-logo" href="#"><img src="images/logo.png"></a>
         <h5 class="footer-input-title">En son bonuslardan haberdar olun !</h5>
         <div class="footer-input-container">
-            <input class="footer-input" type="text" placeholder="Telefon numaranızı giriniz">
-            <input class="footer-btn" type="submit" value="Kayıt Ol">
+            <input id="subscribe_input" class="footer-input" type="text" placeholder="Telefon numaranızı giriniz">
+            <input id="subscribe_btn" class="footer-btn" type="submit" value="Kayıt Ol">
         </div>
     </div>
 
@@ -58,7 +58,9 @@
 @mark:html_footer_end@
 
 <script type="text/javascript" src="js/carousel/js/carousel.min.js"></script>
-<script type="text/javascript" src="http://www.owlcarousel.owlgraphic.com/assets/owlcarousel/owl.carousel.js"></script>
+<script type="text/javascript" src="js/carousel/js/owl.carousel.min.js"></script>
+<script type="text/javascript" src="js/input_mask.min.js"></script>
+
 <script type="text/javascript">
 $(document).ready(function() {
     $(".owlCarouselSelector, .owlCarouselSelector").owlCarousel({
@@ -117,6 +119,23 @@ $(document).ready(function() {
         }else{
             input.val(0);
         }
+    });
+
+    $("#subscribe_input").mask("0999-999-99-99");
+    $("#subscribe_btn").on('click', function(e) {
+        e.preventDefault();
+        var url = root_url+'ajax/subscribe';
+        var regex = /^0[0-9]{3}-[0-9]{3}-[0-9]{2}-[0-9]{2}$/;
+        var number = $("#subscribe_input").val();
+        $.post(url, {phone:number}, function(response) {
+            if (response == '1') {
+                alert('Numaranız sistemimize kayıt edildi, Teşekkür ederiz!');
+            }else if(response == '2') {
+                alert('Geçersiz telefon numarası.');
+            }else if(response == '3') {
+                alert('Numaranız zaten sistemimizde mevcut ilginiz için Teşekkür ederiz!');
+            }
+        });
     });
 });
 </script>

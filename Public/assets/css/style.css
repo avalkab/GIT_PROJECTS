@@ -445,6 +445,23 @@ table {
     float: left;
     position: relative;
 }
+.side-comments-list li.hasReply {
+    background-color: #ddf5f0;
+}
+.side-comments-list li.hasReply:after{
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    left: -15px;
+    top: -5px;
+    padding: 2px 5px;
+    color: #333745;
+    background: url(../images/quota.png) no-repeat;
+    border-radius: 3px;
+    text-align: center;
+    font-size: 11px;
+}
 .side-comments-list li i{
     float: left;
     width: 27px;

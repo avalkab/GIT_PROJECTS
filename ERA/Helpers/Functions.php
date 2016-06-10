@@ -113,7 +113,14 @@ function banners() {
     return view()->setVars(['banners' => $banners])->template('banner');
 }
 
+function javascriptSettings() {
+    return '<script type="text/javascript">
+    var root_url = "'.(__WEBROOT).'";
+    </script>';
+}
+
 hook()->setEvent('page_top', 'banners');
+hook()->setEvent('html_head_top', 'javascriptSettings');
 
 //hook()->setEvent('run_end', 'app_debug');
 //hook()->setEvent('run_end', 'pass_debug');

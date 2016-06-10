@@ -27,6 +27,7 @@
     if($comment['yorum_id'] == 0) {
     ?>
     <li data-comment-id="<?php echo $comment['id']; ?>">
+        <span class="reply">Yanıtla</span>
         <i class="icon comment"></i>
         <a class="title" href="#"><?php echo $comment['kullanici_adi']; ?>&nbsp;<i class="time"><?php dater($comment['ekleme_tarihi']); ?></i></a>
         <p><?php echo $comment['yorum']; ?></p>
@@ -44,7 +45,7 @@
 <div id="leaveComment" class="content-table inContents container tabContent">
     <form id="yorumAlani" class="commentArea" method="post" _lpchecked="1">
         <input class="comment-text" type="text" name="yorum" placeholder="Yorum yaz...">
-        <input type="hidden" name="yorum_id" value="0">
+        <input id="yorum_id" type="hidden" name="yorum_id" value="0">
         <input class="comment-btn" type="submit" name="yorum_gonder" value="Gönder">
     </form>
 </div>
@@ -52,15 +53,31 @@
 <script type="text/javascript">
 $(window).ready(function() {
     var id = '<?php echo id(); ?>';
-    var url = '<?php echo __WEBROOT; ?>ajax/newComment';
+    var url = root_url+'ajax/newComment';
 
     $("#yorumAlani").submit(function(e) {
         e.preventDefault();
-        var url_data = $(this).serializeArray(); //+'&post_id=<?php echo id(); ?>';
+        var url_data = $(this).serializeArray();
         url_data[url_data.length] = {name: "icerik_id", value: '<?php echo id(); ?>'};
         $.post(url, url_data, function(response){
-            console.log(response);
+            if (response == '1') {
+                window.location.reload();
+            }
         });
+    });
+
+    $(".side-comments-list .reply").click(function(){
+        var parent_li = $(this).parent('li');
+        var yorum_id = parent_li.attr('data-comment-id');
+        var comment_input = $("#yorum_id");
+        if (!parent_li.hasClass('hasReply')) {
+            $(".side-comments-list li").removeClass('hasReply');
+            comment_input.val(yorum_id);
+            parent_li.addClass('hasReply');
+        }else{
+            comment_input.val(0);
+            parent_li.removeClass('hasReply');
+        }
     });
 });
 </script>
